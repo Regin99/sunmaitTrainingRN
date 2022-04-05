@@ -1,14 +1,19 @@
+/* eslint-disable prettier/prettier */
 import {TouchableOpacity, View, StyleSheet} from 'react-native';
 import React, {useState} from 'react';
 
 const Checkbox = ({onPress, checked, type = 'square'}) => {
   const [isChecked, setIsChecked] = useState(checked);
-  console.log(type);
+
   return (
     <TouchableOpacity
-      style={[styles.checkbox, styles[type]]}
-      onPress={() => setIsChecked(!isChecked)}
-    />
+      style={[styles.checkbox, styles[type], isChecked && styles.checked]}
+      onPress={() => {
+        setIsChecked(!isChecked);
+        onPress(!isChecked);
+      }}>
+      <View style={styles.checkboxInner} />
+    </TouchableOpacity>
   );
 };
 const styles = StyleSheet.create({
@@ -27,6 +32,23 @@ const styles = StyleSheet.create({
   },
   square: {
     borderRadius: 2,
+  },
+  checked: {
+    backgroundColor: '#1C00FF',
+  },
+  checkboxInner: {
+    width: 9,
+    height: 9,
+    borderWidth: 2,
+    borderColor: '#fff',
+    borderLeftWidth: 0,
+    borderTopWidth: 0,
+    borderBottomLeftRadius: 7,
+    boxSizing: 'border-box',
+    transform: [{rotate: '45deg'}],
+    position: 'absolute',
+    top: -1,
+    left: 0,
   },
 });
 
