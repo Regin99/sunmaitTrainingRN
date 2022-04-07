@@ -12,43 +12,30 @@ import {
 
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
-const UploadPhoto = () => {
-  const [imageSource, setImageSource] = useState({
-    uri: 'https://cdn-icons-png.flaticon.com/512/456/456212.png',
-  });
+const UploadPhoto = ({avatar, setAvatar}) => {
   const [modalVisible, setModalVisible] = useState(false);
+
+  const getImage = response => {
+    setModalVisible(!modalVisible);
+    if (response.didCancel) {
+      console.log('User cancelled image picker');
+    } else if (response.error) {
+      console.log('ImagePicker Error: ', response.error);
+    } else if (response.customButton) {
+      console.log('User tapped custom button: ', response.customButton);
+    } else {
+      setAvatar({uri: response.assets[0].uri});
+    }
+  };
 
   const selectImage = option => {
     switch (option) {
       case 'camera':
-        launchCamera({}, response => {
-          setModalVisible(!modalVisible);
-          if (response.didCancel) {
-            console.log('User cancelled image picker');
-          } else if (response.error) {
-            console.log('ImagePicker Error: ', response.error);
-          } else if (response.customButton) {
-            console.log('User tapped custom button: ', response.customButton);
-          } else {
-            setImageSource({uri: response.assets[0].uri});
-          }
-        });
+        launchCamera({}, getImage);
         break;
       case 'gallery':
-        launchImageLibrary({}, response => {
-          setModalVisible(!modalVisible);
-          if (response.didCancel) {
-            console.log('User cancelled image picker');
-          } else if (response.error) {
-            console.log('ImagePicker Error: ', response.error);
-          } else if (response.customButton) {
-            console.log('User tapped custom button: ', response.customButton);
-          } else {
-            setImageSource({uri: response.assets[0].uri});
-          }
-        });
+        launchImageLibrary({}, getImage);
         break;
-
       default:
         break;
     }
@@ -60,6 +47,8 @@ const UploadPhoto = () => {
       onPress={() => {
         setModalVisible(!modalVisible);
       }}>
+      <Image style={styles.avatarIcon} source={avatar} />
+      <Text>Upload a photo</Text>
       <Modal
         visible={modalVisible}
         animationType="fade"
@@ -91,9 +80,6 @@ const UploadPhoto = () => {
           </View>
         </TouchableWithoutFeedback>
       </Modal>
-
-      <Image style={styles.avatarIcon} source={imageSource} />
-      <Text>Upload a photo</Text>
     </TouchableOpacity>
   );
 };

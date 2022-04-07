@@ -17,6 +17,9 @@ const Form = ({setIsNextButtonDisabled}) => {
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
   const [rePasswordValue, setRePasswordValue] = useState('');
+  const [avatar, setAvatar] = useState({
+    uri: 'https://cdn-icons-png.flaticon.com/512/456/456212.png',
+  });
 
   const emailRef = useRef(null);
   const numberRef = useRef(null);
@@ -110,15 +113,16 @@ const Form = ({setIsNextButtonDisabled}) => {
 
   return (
     <View style={styles.form}>
-      <UploadPhoto />
+      <UploadPhoto avatar={avatar} setAvatar={setAvatar} />
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
           value={emailValue}
           ref={emailRef}
           keyboardType="email-address"
+          returnKeyType="next"
           placeholder="Enter your email"
-          onChangeText={text => setEmailValue(text)}
+          onChangeText={setEmailValue}
           onBlur={() => {
             validate('email', emailValue);
           }}
@@ -128,9 +132,8 @@ const Form = ({setIsNextButtonDisabled}) => {
           ref={numberRef}
           keyboardType="phone-pad"
           value={numberValue}
-          onChangeText={text => {
-            setNumberValue(text);
-          }}
+          onChangeText={setNumberValue}
+          returnKeyType="next"
           placeholder="Enter your phone number"
           mask={'+375 ([00]) [000]-[00]-[00]'}
           onBlur={() => {
@@ -143,7 +146,8 @@ const Form = ({setIsNextButtonDisabled}) => {
             ref={passwordRef}
             placeholder="Enter your password"
             value={passwordValue}
-            onChangeText={text => setPasswordValue(text)}
+            returnKeyType="next"
+            onChangeText={setPasswordValue}
             secureTextEntry={showButton}
             onBlur={() => {
               validate('password', passwordValue);
@@ -158,9 +162,10 @@ const Form = ({setIsNextButtonDisabled}) => {
             style={styles.input}
             ref={rePasswordRef}
             value={rePasswordValue}
+            returnKeyType="done"
             placeholder="Repeat your password"
             secureTextEntry={showButton}
-            onChangeText={text => setRePasswordValue(text)}
+            onChangeText={setRePasswordValue}
             onBlur={() => {
               validate('rePassword', rePasswordValue);
             }}
@@ -172,7 +177,7 @@ const Form = ({setIsNextButtonDisabled}) => {
           </Text>
           <Checkbox
             type="square"
-            checked={isChecked}
+            isChecked={isChecked}
             onPress={() => setIsChecked(!isChecked)}
           />
         </View>
