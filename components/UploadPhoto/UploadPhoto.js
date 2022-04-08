@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, {useState} from 'react';
 import {
   TouchableOpacity,
@@ -12,43 +11,30 @@ import {
 
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
-const UploadPhoto = () => {
-  const [imageSource, setImageSource] = useState({
-    uri: 'https://cdn-icons-png.flaticon.com/512/456/456212.png',
-  });
-  const [modalVisible, setModalVisible] = useState(false);
+const UploadPhoto = ({avatarValue, setAvatarValue}) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const getImage = response => {
+    setIsModalVisible(!isModalVisible);
+    if (response.didCancel) {
+      console.log('User cancelled image picker');
+    } else if (response.error) {
+      console.log('ImagePicker Error: ', response.error);
+    } else if (response.customButton) {
+      console.log('User tapped custom button: ', response.customButton);
+    } else {
+      setAvatarValue({uri: response.assets[0].uri});
+    }
+  };
 
   const selectImage = option => {
     switch (option) {
       case 'camera':
-        launchCamera({}, response => {
-          setModalVisible(!modalVisible);
-          if (response.didCancel) {
-            console.log('User cancelled image picker');
-          } else if (response.error) {
-            console.log('ImagePicker Error: ', response.error);
-          } else if (response.customButton) {
-            console.log('User tapped custom button: ', response.customButton);
-          } else {
-            setImageSource({uri: response.assets[0].uri});
-          }
-        });
+        launchCamera({}, getImage);
         break;
       case 'gallery':
-        launchImageLibrary({}, response => {
-          setModalVisible(!modalVisible);
-          if (response.didCancel) {
-            console.log('User cancelled image picker');
-          } else if (response.error) {
-            console.log('ImagePicker Error: ', response.error);
-          } else if (response.customButton) {
-            console.log('User tapped custom button: ', response.customButton);
-          } else {
-            setImageSource({uri: response.assets[0].uri});
-          }
-        });
+        launchImageLibrary({}, getImage);
         break;
-
       default:
         break;
     }
@@ -58,20 +44,22 @@ const UploadPhoto = () => {
     <TouchableOpacity
       style={styles.uploadContainer}
       onPress={() => {
-        setModalVisible(!modalVisible);
+        setIsModalVisible(!isModalVisible);
       }}>
+      <Image style={styles.avatarIcon} source={avatarValue} />
+      <Text>Upload a photo</Text>
       <Modal
-        visible={modalVisible}
+        visible={isModalVisible}
         animationType="fade"
         style={styles.modal}
         transparent={true}
         onRequestClose={() => {
-          setModalVisible(!modalVisible);
+          setIsModalVisible(!isModalVisible);
         }}>
         <TouchableWithoutFeedback
           style={styles.cancelOpacity}
           onPress={() => {
-            setModalVisible(!modalVisible);
+            setIsModalVisible(!isModalVisible);
           }}>
           <View style={styles.modal}>
             <TouchableOpacity
@@ -91,9 +79,6 @@ const UploadPhoto = () => {
           </View>
         </TouchableWithoutFeedback>
       </Modal>
-
-      <Image style={styles.avatarIcon} source={imageSource} />
-      <Text>Upload a photo</Text>
     </TouchableOpacity>
   );
 };

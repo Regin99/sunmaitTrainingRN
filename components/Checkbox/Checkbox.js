@@ -1,17 +1,11 @@
-/* eslint-disable prettier/prettier */
 import {TouchableOpacity, View, StyleSheet} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 
-const Checkbox = ({onPress, checked, type = 'square'}) => {
-  const [isChecked, setIsChecked] = useState(checked);
-
+const Checkbox = ({onPress, isChecked, type = 'square'}) => {
   return (
     <TouchableOpacity
       style={[styles.checkbox, styles[type], isChecked && styles.checked]}
-      onPress={() => {
-        setIsChecked(!isChecked);
-        onPress(!isChecked);
-      }}>
+      onPress={onPress}>
       <View style={styles.checkboxInner} />
     </TouchableOpacity>
   );
