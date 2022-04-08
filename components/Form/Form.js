@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, {useState, useEffect, useRef} from 'react';
 import UploadPhoto from '../UploadPhoto/UploadPhoto';
 import Checkbox from '../Checkbox/Checkbox';
@@ -12,15 +11,19 @@ import {
 } from 'react-native';
 import TextInputMask from 'react-native-text-input-mask';
 
-const Form = ({setIsNextButtonDisabled}) => {
-  const [numberValue, setNumberValue] = useState('');
-  const [emailValue, setEmailValue] = useState('');
-  const [passwordValue, setPasswordValue] = useState('');
-  const [rePasswordValue, setRePasswordValue] = useState('');
-  const [avatar, setAvatar] = useState({
-    uri: 'https://cdn-icons-png.flaticon.com/512/456/456212.png',
-  });
-
+const Form = ({
+  avatarValue,
+  setAvatarValue,
+  numberValue,
+  setNumberValue,
+  emailValue,
+  setEmailValue,
+  passwordValue,
+  setPasswordValue,
+  rePasswordValue,
+  setRePasswordValue,
+  setIsNextButtonDisabled,
+}) => {
   const emailRef = useRef(null);
   const numberRef = useRef(null);
   const passwordRef = useRef(null);
@@ -113,7 +116,7 @@ const Form = ({setIsNextButtonDisabled}) => {
 
   return (
     <View style={styles.form}>
-      <UploadPhoto avatar={avatar} setAvatar={setAvatar} />
+      <UploadPhoto avatarValue={avatarValue} setAvatarValue={setAvatarValue} />
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}

@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, {useState} from 'react';
 import {
   TouchableOpacity,
@@ -12,11 +11,11 @@ import {
 
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
-const UploadPhoto = ({avatar, setAvatar}) => {
-  const [modalVisible, setModalVisible] = useState(false);
+const UploadPhoto = ({avatarValue, setAvatarValue}) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const getImage = response => {
-    setModalVisible(!modalVisible);
+    setIsModalVisible(!isModalVisible);
     if (response.didCancel) {
       console.log('User cancelled image picker');
     } else if (response.error) {
@@ -24,7 +23,7 @@ const UploadPhoto = ({avatar, setAvatar}) => {
     } else if (response.customButton) {
       console.log('User tapped custom button: ', response.customButton);
     } else {
-      setAvatar({uri: response.assets[0].uri});
+      setAvatarValue({uri: response.assets[0].uri});
     }
   };
 
@@ -45,22 +44,22 @@ const UploadPhoto = ({avatar, setAvatar}) => {
     <TouchableOpacity
       style={styles.uploadContainer}
       onPress={() => {
-        setModalVisible(!modalVisible);
+        setIsModalVisible(!isModalVisible);
       }}>
-      <Image style={styles.avatarIcon} source={avatar} />
+      <Image style={styles.avatarIcon} source={avatarValue} />
       <Text>Upload a photo</Text>
       <Modal
-        visible={modalVisible}
+        visible={isModalVisible}
         animationType="fade"
         style={styles.modal}
         transparent={true}
         onRequestClose={() => {
-          setModalVisible(!modalVisible);
+          setIsModalVisible(!isModalVisible);
         }}>
         <TouchableWithoutFeedback
           style={styles.cancelOpacity}
           onPress={() => {
-            setModalVisible(!modalVisible);
+            setIsModalVisible(!isModalVisible);
           }}>
           <View style={styles.modal}>
             <TouchableOpacity
