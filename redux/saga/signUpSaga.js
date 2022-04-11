@@ -1,11 +1,14 @@
-import {signUpFailure, signUpSuccess} from '../actions/signUpActions';
 import {call, put, takeEvery} from 'redux-saga/effects';
-import {SIGNUP_REQUEST} from '../types';
+import {AUTH_TYPES} from '../types';
+import {signUpActions} from '../actions/signUpActions';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+const {SIGNUP_REQUEST} = AUTH_TYPES;
+const {signUpSuccess, signUpFailure} = signUpActions;
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-const signUpUser = (email, number, password, avatar) => {
+const signUpUser = userData => {
+  const {email, number, password, avatar} = userData;
   return new Promise((resolve, reject) => {
     AsyncStorage.getItem('users', (err, result) => {
       if (err) {
@@ -38,10 +41,10 @@ const signUpUser = (email, number, password, avatar) => {
 };
 
 function* signUpWorker(action) {
-  const {email, number, password, avatar} = action.payload;
+  const userData = action.payload;
   try {
     yield call(delay, 1000);
-    yield call(signUpUser, email, number, password, avatar);
+    yield call(signUpUser, userData);
     yield put(signUpSuccess());
   } catch (err) {
     yield put(signUpFailure(err.message));

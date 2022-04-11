@@ -1,24 +1,22 @@
-import {SIGNUP_FAILURE, SIGNUP_SUCCESS, SIGNUP_REQUEST} from '../types';
+import {AUTH_TYPES} from '../types';
 
-export const signUpRequest = (email, number, password, avatar) => {
-  return {
-    type: SIGNUP_REQUEST,
-    payload: {
-      email,
-      number,
-      password,
-      avatar,
-    },
-  };
-};
-export const signUpSuccess = () => {
-  return {
-    type: SIGNUP_SUCCESS,
-  };
-};
-export const signUpFailure = error => {
-  return {
-    type: SIGNUP_FAILURE,
-    payload: error,
-  };
+const {SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE} = AUTH_TYPES;
+
+const signUpRequest = userData => ({
+  type: SIGNUP_REQUEST,
+  payload: userData,
+});
+const signUpSuccess = () => ({
+  type: SIGNUP_SUCCESS,
+});
+
+const signUpFailure = error => ({
+  type: SIGNUP_FAILURE,
+  payload: error,
+});
+
+export const signUpActions = {
+  signUpRequest,
+  signUpSuccess,
+  signUpFailure,
 };

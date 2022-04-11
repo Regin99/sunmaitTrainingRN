@@ -1,32 +1,33 @@
-import {SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS} from '../types';
+import {AUTH_TYPES} from '../types';
 
 const initialState = {
   isLoading: false,
-  error: null,
+  signError: null,
   isSignUp: false,
 };
 
 const signUpReducer = (state = initialState, action) => {
+  const {SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE} = AUTH_TYPES;
   switch (action.type) {
     case SIGNUP_REQUEST:
       return {
         ...state,
         isLoading: true,
-        error: null,
+        signError: null,
         isSignUp: false,
       };
     case SIGNUP_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        error: null,
+        signError: null,
         isSignUp: true,
       };
     case SIGNUP_FAILURE:
       return {
         ...state,
         isLoading: false,
-        error: action.payload,
+        signError: action.payload,
         isSignUp: false,
       };
     default:

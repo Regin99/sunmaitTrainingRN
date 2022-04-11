@@ -1,14 +1,15 @@
-import {LOGIN_FAILURE, LOGIN_SUCCESS, LOGIN_REQUEST} from '../types';
+import {AUTH_TYPES} from '../types';
 
 const initialState = {
   isLoggIn: false,
   isLoading: false,
-  error: null,
+  loginError: null,
   email: '',
   password: '',
 };
 
 const logInReducer = (state = initialState, action) => {
+  const {LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE} = AUTH_TYPES;
   switch (action.type) {
     case LOGIN_REQUEST:
       return {
@@ -16,21 +17,21 @@ const logInReducer = (state = initialState, action) => {
         isLoading: true,
         email: action.payload.email,
         password: action.payload.password,
-        error: null,
+        loginError: null,
         isLoggIn: false,
       };
     case LOGIN_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        error: null,
+        loginError: null,
         isLoggIn: true,
       };
     case LOGIN_FAILURE:
       return {
         ...state,
         isLoading: false,
-        error: action.payload,
+        loginError: action.payload,
         isLoggIn: false,
       };
     default:

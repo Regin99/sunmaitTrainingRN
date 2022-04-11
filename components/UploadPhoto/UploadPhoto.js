@@ -28,15 +28,11 @@ const UploadPhoto = ({avatarValue, setAvatarValue}) => {
   };
 
   const selectImage = option => {
-    switch (option) {
-      case 'camera':
-        launchCamera({}, getImage);
-        break;
-      case 'gallery':
-        launchImageLibrary({}, getImage);
-        break;
-      default:
-        break;
+    if (option === 'camera') {
+      launchCamera({}, getImage);
+    }
+    if (option === 'gallery') {
+      launchImageLibrary({}, getImage);
     }
   };
 

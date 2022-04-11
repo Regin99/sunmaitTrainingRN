@@ -18,14 +18,13 @@ const Loader = () => {
   });
 
   const spin = () => {
-    Animated.timing(spiningAnim, {
-      toValue: 1,
-      duration: 1000,
-      useNativeDriver: true,
-    }).start(() => {
-      spiningAnim.setValue(0);
-      spin();
-    });
+    Animated.loop(
+      Animated.timing(spiningAnim, {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
+      }),
+    ).start();
   };
 
   useEffect(() => {

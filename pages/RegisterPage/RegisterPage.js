@@ -13,9 +13,13 @@ import {
   View,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {signUpRequest} from '../../redux/actions/signUpActions';
-import {logInRequest} from '../../redux/actions/logInActions';
+import {signUpActions} from '../../redux/actions/signUpActions';
+import {loginActions} from '../../redux/actions/logInActions';
 import Loader from '../../components/Loader/Loader';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const {signUpRequest} = signUpActions;
+const {logInRequest} = loginActions;
 
 const RegisterPage = () => {
   const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(true);
@@ -34,8 +38,8 @@ const RegisterPage = () => {
 
   const dispatch = useDispatch();
 
-  const isLoggIn = useSelector(state => state.logIn);
-  const isSignUp = useSelector(state => state.signUp);
+  const {isLoggIn, loginError} = useSelector(state => state.logIn);
+  const {isSignUp, signError} = useSelector(state => state.signUp);
   const isLoading = useSelector(
     state => state.signUp.isLoading || state.logIn.isLoading,
   );
@@ -51,7 +55,7 @@ const RegisterPage = () => {
     setIsModalVisible(!isModalVisible);
   };
 
-  const nextAlert = (email, number, password, avatar) => {
+  const nextAlert = userData => {
     Alert.alert('Are you sure?', '', [
       {
         text: 'Cancel',
@@ -62,7 +66,7 @@ const RegisterPage = () => {
         text: 'Register',
         onPress: () => {
           handleSubmit();
-          dispatch(signUpRequest(email, number, password, avatar));
+          dispatch(signUpRequest(userData));
           setIsLogInShown(false);
           setIsRegisterShown(true);
         },
@@ -71,9 +75,10 @@ const RegisterPage = () => {
         text: 'Log in',
         onPress: () => {
           handleSubmit();
-          dispatch(logInRequest(email, password));
+          dispatch(logInRequest(userData));
           setIsRegisterShown(false);
           setIsLogInShown(true);
+          // AsyncStorage.clear();
         },
       },
     ]);
@@ -108,7 +113,13 @@ const RegisterPage = () => {
           isNextButtonDisabled ? styles.buttonInactive : styles.buttonActive,
         ]}
         onPress={() => {
-          nextAlert(emailValue, numberValue, passwordValue, avatarValue);
+          const userData = {
+            number: numberValue,
+            email: emailValue,
+            password: passwordValue,
+            avatar: avatarValue,
+          };
+          nextAlert(userData);
         }}
         disabled={isNextButtonDisabled}>
         <Text style={styles.buttonText}>Next</Text>
@@ -131,17 +142,17 @@ const RegisterPage = () => {
               {isRegisterShown ? (
                 <>
                   <Text style={styles.modalText}>
-                    {isSignUp.isSignUp ? 'Successfully registered!' : 'Error'}
+                    {isSignUp ? 'Successfully registered!' : 'Error'}
                   </Text>
-                  <Text style={styles.modalText}>{isSignUp.error}</Text>
+                  <Text style={styles.modalText}>{signError}</Text>
                 </>
               ) : null}
               {isLogInShown ? (
                 <>
                   <Text style={styles.modalText}>
-                    {isLoggIn.isLoggIn ? 'Logged in!' : 'Error'}
+                    {isLoggIn ? 'Logged in!' : 'Error'}
                   </Text>
-                  <Text style={styles.modalText}>{isLoggIn.error}</Text>
+                  <Text style={styles.modalText}>{loginError}</Text>
                 </>
               ) : null}
             </View>

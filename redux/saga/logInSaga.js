@@ -1,43 +1,44 @@
-import {logInFailure, logInSuccess} from '../actions/logInActions';
-import {LOGIN_REQUEST} from '../types';
+import {AUTH_TYPES} from '../types';
+import {loginActions} from '../actions/logInActions';
 import {put, call, takeEvery} from 'redux-saga/effects';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+const {LOGIN_REQUEST} = AUTH_TYPES;
+const {logInSuccess, logInFailure} = loginActions;
+
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-const logInUser = (email, password) => {
+const logInUser = userData => {
+  const {email, password} = userData;
+  console.log(email, password);
   return new Promise((resolve, reject) => {
     AsyncStorage.getItem('users', (err, result) => {
       if (err) {
-        reject(err);
+        reject(new Error('No users in storage'));
       } else {
         const usersArray = JSON.parse(result);
         if (usersArray) {
-          if (
-            usersArray.some(
-              user => user.email === email && user.password === password,
-            )
-          ) {
-            resolve(
-              usersArray.find(
-                user => user.email === email && user.password === password,
-              ),
-            );
+          const foundedUser = usersArray.find(
+            user => user.email === email && user.password === password,
+          );
+          if (foundedUser) {
+            resolve(foundedUser);
           } else {
             reject(new Error('Wrong email or password'));
           }
+        } else {
+          reject(new Error('No users in storage'));
         }
-        reject(new Error('No users in storage'));
       }
     });
   });
 };
 
 function* logInWorker(action) {
-  const {email, password} = action.payload;
+  const userData = action.payload;
   try {
     yield call(delay, 1000);
-    const user = yield call(logInUser, email, password);
+    const user = yield call(logInUser, userData);
     yield put(logInSuccess(user));
   } catch (err) {
     yield put(logInFailure(err.message));
