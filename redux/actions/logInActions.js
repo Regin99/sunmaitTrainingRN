@@ -7,8 +7,9 @@ const logInRequest = userData => ({
   payload: userData,
 });
 
-const logInSuccess = () => ({
+const logInSuccess = userData => ({
   type: LOGIN_SUCCESS,
+  payload: userData,
 });
 
 const logInFailure = error => ({

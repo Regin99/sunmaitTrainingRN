@@ -1,10 +1,11 @@
-import {call, put, takeEvery} from 'redux-saga/effects';
 import {AUTH_TYPES} from '../types';
 import {signUpActions} from '../actions/signUpActions';
+import {call, put, takeEvery} from 'redux-saga/effects';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const {SIGNUP_REQUEST} = AUTH_TYPES;
 const {signUpSuccess, signUpFailure} = signUpActions;
+
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 const signUpUser = userData => {
@@ -45,7 +46,7 @@ function* signUpWorker(action) {
   try {
     yield call(delay, 1000);
     yield call(signUpUser, userData);
-    yield put(signUpSuccess());
+    yield put(signUpSuccess(userData));
   } catch (err) {
     yield put(signUpFailure(err.message));
   }

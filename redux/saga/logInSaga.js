@@ -10,7 +10,6 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 const logInUser = userData => {
   const {email, password} = userData;
-  console.log(email, password);
   return new Promise((resolve, reject) => {
     AsyncStorage.getItem('users', (err, result) => {
       if (err) {
@@ -36,6 +35,7 @@ const logInUser = userData => {
 
 function* logInWorker(action) {
   const userData = action.payload;
+  console.log(userData);
   try {
     yield call(delay, 1000);
     const user = yield call(logInUser, userData);

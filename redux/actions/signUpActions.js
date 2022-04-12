@@ -6,8 +6,9 @@ const signUpRequest = userData => ({
   type: SIGNUP_REQUEST,
   payload: userData,
 });
-const signUpSuccess = () => ({
+const signUpSuccess = userData => ({
   type: SIGNUP_SUCCESS,
+  payload: userData,
 });
 
 const signUpFailure = error => ({
