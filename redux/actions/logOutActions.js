@@ -1,6 +1,6 @@
-import {AUTH_TYPES} from '../types';
+import {AUTH_ACTIONS_TYPES} from '../types';
 
-const {LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE} = AUTH_TYPES;
+const {LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE} = AUTH_ACTIONS_TYPES;
 
 const logOutRequest = () => ({
   type: LOGOUT_REQUEST,

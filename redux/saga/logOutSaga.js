@@ -1,8 +1,8 @@
-import {AUTH_TYPES} from '../types';
+import {AUTH_ACTIONS_TYPES} from '../types';
 import {logOutActions} from '../actions/logOutActions';
 import {put, takeEvery, call} from 'redux-saga/effects';
 
-const {LOGOUT_REQUEST} = AUTH_TYPES;
+const {LOGOUT_REQUEST} = AUTH_ACTIONS_TYPES;
 const {logOutSuccess, logOutFailure} = logOutActions;
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));

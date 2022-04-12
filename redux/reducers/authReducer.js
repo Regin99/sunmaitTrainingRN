@@ -1,4 +1,4 @@
-import {AUTH_TYPES} from '../types';
+import {AUTH_ACTIONS_TYPES} from '../types';
 
 const initialState = {
   isLoading: false,
@@ -18,12 +18,12 @@ const authReducer = (state = initialState, action) => {
     LOGOUT_REQUEST,
     LOGOUT_SUCCESS,
     LOGOUT_FAILURE,
-  } = AUTH_TYPES;
+  } = AUTH_ACTIONS_TYPES;
 
   switch (action.type) {
     case LOGIN_REQUEST:
     case SIGNUP_REQUEST:
-    case LOGOUT_REQUEST: //is this bad practice?
+    case LOGOUT_REQUEST:
       return {
         ...state,
         isLoading: true,

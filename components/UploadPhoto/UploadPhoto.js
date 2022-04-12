@@ -30,8 +30,7 @@ const UploadPhoto = ({avatarValue, setAvatarValue}) => {
   const selectImage = option => {
     if (option === 'camera') {
       launchCamera({}, getImage);
-    }
-    if (option === 'gallery') {
+    } else {
       launchImageLibrary({}, getImage);
     }
   };

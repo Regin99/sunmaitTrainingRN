@@ -1,9 +1,9 @@
-import {AUTH_TYPES} from '../types';
+import {AUTH_ACTIONS_TYPES} from '../types';
 import {loginActions} from '../actions/logInActions';
 import {put, call, takeEvery} from 'redux-saga/effects';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const {LOGIN_REQUEST} = AUTH_TYPES;
+const {LOGIN_REQUEST} = AUTH_ACTIONS_TYPES;
 const {logInSuccess, logInFailure} = loginActions;
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -35,7 +35,6 @@ const logInUser = userData => {
 
 function* logInWorker(action) {
   const userData = action.payload;
-  console.log(userData);
   try {
     yield call(delay, 1000);
     const user = yield call(logInUser, userData);

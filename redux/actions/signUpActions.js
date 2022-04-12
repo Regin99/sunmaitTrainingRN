@@ -1,6 +1,6 @@
-import {AUTH_TYPES} from '../types';
+import {AUTH_ACTIONS_TYPES} from '../types';
 
-const {SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE} = AUTH_TYPES;
+const {SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE} = AUTH_ACTIONS_TYPES;
 
 const signUpRequest = userData => ({
   type: SIGNUP_REQUEST,

@@ -14,19 +14,17 @@ const BottomIcon = ({name}) => {
   const [icon, setIcon] = useState(icons[name]);
   const {avatar} = useSelector(state => state.auth.user);
 
+  const styleArr = [styles.iconImage];
+  if (name === 'person') {
+    styleArr.push(styles.avatar);
+  }
+  if (name === 'person-outline') {
+    styleArr.push(styles.avatarActive);
+  }
+
   return (
     <View style={styles.iconContainer}>
-      <Image
-        source={icon ? icon : avatar}
-        style={[
-          styles.iconImage,
-          name === 'person-outline'
-            ? styles.avatarActive
-            : name === 'person'
-            ? styles.avatar
-            : null,
-        ]}
-      />
+      <Image source={icon ? icon : avatar} style={styleArr} />
     </View>
   );
 };

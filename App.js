@@ -5,19 +5,27 @@
  * @format
  * @flow strict-local
  */
+
 import React from 'react';
 import {Provider} from 'react-redux';
 import {store} from './redux/store';
-import SignUpPage from './pages/SignUpPage/SignUpPage';
+import {useSelector} from 'react-redux';
+
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
+//pages
 import LogInPage from './pages/LogInPage/LogInPage';
+import SignUpPage from './pages/SignUpPage/SignUpPage';
+
 import HomePage from './pages/HomePage/HomePage';
 import SearchPage from './pages/SearchPage/SearchPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
+
 import PrivacyModal from './pages/PrivacyModal/PrivacyModal';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {useSelector} from 'react-redux';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
+//icons
 import BottomIcon from './components/BottomIcon/BottomIcon';
 import BackArrow from './components/BackArrow/BackArrow';
 
@@ -59,7 +67,7 @@ const App = () => {
         src={{
           uri: 'https://img.icons8.com/ios/344/circled-left-2.png',
         }}
-        onClick={() => navigation.navigation.goBack()}
+        onPress={() => navigation.navigation.goBack()}
       />
     ),
     headerTitleStyle: {

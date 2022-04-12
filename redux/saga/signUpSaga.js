@@ -1,9 +1,9 @@
-import {AUTH_TYPES} from '../types';
+import {AUTH_ACTIONS_TYPES} from '../types';
 import {signUpActions} from '../actions/signUpActions';
 import {call, put, takeEvery} from 'redux-saga/effects';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const {SIGNUP_REQUEST} = AUTH_TYPES;
+const {SIGNUP_REQUEST} = AUTH_ACTIONS_TYPES;
 const {signUpSuccess, signUpFailure} = signUpActions;
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));

@@ -7,6 +7,10 @@ import {
   ScrollView,
 } from 'react-native';
 
+import PAGES from '../pages';
+
+const {SIGN_UP} = PAGES;
+
 const PrivacyModal = ({navigation}) => {
   return (
     <View style={styles.container}>
@@ -50,9 +54,7 @@ const PrivacyModal = ({navigation}) => {
       </ScrollView>
       <TouchableOpacity
         style={styles.closeButton}
-        onPress={() => {
-          navigation.navigate('SignUp');
-        }}>
+        onPress={() => navigation.navigate(SIGN_UP)}>
         <Text style={styles.closeButtonText}>Close</Text>
       </TouchableOpacity>
     </View>

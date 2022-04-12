@@ -9,17 +9,23 @@ import {
   StyleSheet,
   View,
   Image,
+  TextInput,
 } from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {signUpActions} from '../../redux/actions/signUpActions';
-import Loader from '../../components/Loader/Loader';
+import TextInputMask from 'react-native-text-input-mask';
+
 import UploadPhoto from '../../components/UploadPhoto/UploadPhoto';
 import Checkbox from '../../components/Checkbox/Checkbox';
-import TextInputMask from 'react-native-text-input-mask';
-import {TextInput} from 'react-native';
+import Loader from '../../components/Loader/Loader';
 import ModalError from '../../components/ModalError/ModalError';
 
+//redux
+import {useDispatch, useSelector} from 'react-redux';
+import {signUpActions} from '../../redux/actions/signUpActions';
+
+import PAGES from '../pages';
+
 const {signUpRequest} = signUpActions;
+const {PRIVACY_MODAL} = PAGES;
 
 const icons = {
   secured: {
@@ -35,11 +41,11 @@ const SignUpPage = ({navigation}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
 
-  const [numberValue, setNumberValue] = useState('');
-  const [emailValue, setEmailValue] = useState('');
-  const [passwordValue, setPasswordValue] = useState('');
-  const [rePasswordValue, setRePasswordValue] = useState('');
-  const [avatarValue, setAvatarValue] = useState({
+  const [number, setNumber] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [rePassword, setRePassword] = useState('');
+  const [avatar, setAvatar] = useState({
     uri: 'https://cdn-icons-png.flaticon.com/512/456/456212.png',
   });
 
@@ -69,9 +75,7 @@ const SignUpPage = ({navigation}) => {
           Alert.alert('Invalid email', 'Please enter a valid email', [
             {
               text: 'OK',
-              onPress: () => {
-                return emailRef.current.focus();
-              },
+              onPress: () => emailRef.current.focus(),
             },
           ]);
         }
@@ -85,9 +89,7 @@ const SignUpPage = ({navigation}) => {
           Alert.alert('Invalid number', 'Please enter a valid number', [
             {
               text: 'OK',
-              onPress: () => {
-                return numberRef.current.focus();
-              },
+              onPress: () => numberRef.current.focus(),
             },
           ]);
         }
@@ -102,7 +104,7 @@ const SignUpPage = ({navigation}) => {
         }
         break;
       case 'rePassword':
-        if (value !== passwordValue) {
+        if (value !== password) {
           setIsRePasswordValid(false);
           Alert.alert('Invalid password', 'Passwords do not match');
         } else {
@@ -113,11 +115,11 @@ const SignUpPage = ({navigation}) => {
     }
   };
   const handleSubmit = () => {
-    setEmailValue('');
-    setNumberValue('');
-    setPasswordValue('');
-    setRePasswordValue('');
-    setAvatarValue({
+    setEmail('');
+    setNumber('');
+    setPassword('');
+    setRePassword('');
+    setAvatar({
       uri: 'https://cdn-icons-png.flaticon.com/512/456/456212.png',
     });
     setIsModalVisible(!isModalVisible);
@@ -169,33 +171,30 @@ const SignUpPage = ({navigation}) => {
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View style={styles.container}>
           <View style={styles.inputContainer}>
-            <UploadPhoto
-              avatarValue={avatarValue}
-              setAvatarValue={setAvatarValue}
-            />
+            <UploadPhoto avatar={avatar} setAvatar={setAvatar} />
             <TextInput
               style={styles.input}
-              value={emailValue}
+              value={email}
               ref={emailRef}
               keyboardType="email-address"
               returnKeyType="next"
               placeholder="Enter your email"
-              onChangeText={setEmailValue}
+              onChangeText={setEmail}
               onSubmitEditing={() => {
-                validate('email', emailValue);
+                validate('email', email);
               }}
             />
             <TextInputMask
               style={styles.input}
               ref={numberRef}
               keyboardType="phone-pad"
-              value={numberValue}
-              onChangeText={setNumberValue}
+              value={number}
+              onChangeText={setNumber}
               returnKeyType="next"
               placeholder="Enter your phone number"
               mask={'+375 ([00]) [000]-[00]-[00]'}
               onSubmitEditing={() => {
-                validate('number', numberValue);
+                validate('number', number);
               }}
             />
             <View style={styles.passwordInputContainer}>
@@ -203,12 +202,12 @@ const SignUpPage = ({navigation}) => {
                 style={styles.passwordInput}
                 ref={passwordRef}
                 placeholder="Enter your password"
-                value={passwordValue}
+                value={password}
                 returnKeyType="next"
-                onChangeText={setPasswordValue}
+                onChangeText={setPassword}
                 secureTextEntry={isPasswordSecure}
                 onSubmitEditing={() => {
-                  validate('password', passwordValue);
+                  validate('password', password);
                 }}
               />
               <TouchableOpacity
@@ -223,13 +222,13 @@ const SignUpPage = ({navigation}) => {
               <TextInput
                 style={styles.passwordInput}
                 ref={rePasswordRef}
-                value={rePasswordValue}
+                value={rePassword}
                 returnKeyType="done"
                 placeholder="Repeat your password"
                 secureTextEntry={isPasswordSecure}
-                onChangeText={setRePasswordValue}
+                onChangeText={setRePassword}
                 onSubmitEditing={() => {
-                  validate('rePassword', rePasswordValue);
+                  validate('rePassword', rePassword);
                 }}
               />
             </View>
@@ -237,7 +236,7 @@ const SignUpPage = ({navigation}) => {
               <View style={styles.privacyText}>
                 <Text>I accept the </Text>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate('PrivacyModal')}>
+                  onPress={() => navigation.navigate(PRIVACY_MODAL)}>
                   <Text style={styles.underline}>Privacy policy</Text>
                 </TouchableOpacity>
               </View>
@@ -257,10 +256,10 @@ const SignUpPage = ({navigation}) => {
         ]}
         onPress={() => {
           const userData = {
-            number: numberValue,
-            email: emailValue,
-            password: passwordValue,
-            avatar: avatarValue,
+            number: number,
+            email: email,
+            password: password,
+            avatar: avatar,
           };
           nextAlert(userData);
         }}

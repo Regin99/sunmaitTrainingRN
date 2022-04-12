@@ -7,13 +7,19 @@ import {
   StyleSheet,
   Image,
 } from 'react-native';
-import {useDispatch} from 'react-redux';
-import {loginActions} from '../../redux/actions/logInActions';
-import {useSelector} from 'react-redux';
+
 import Loader from '../../components/Loader/Loader';
 import ModalError from '../../components/ModalError/ModalError';
 
+import {useDispatch} from 'react-redux';
+import {loginActions} from '../../redux/actions/logInActions';
+import {useSelector} from 'react-redux';
+
+import PAGES from '../pages';
+
 const {logInRequest} = loginActions;
+
+const {SIGN_UP} = PAGES;
 
 const icons = {
   secured: {
@@ -83,7 +89,7 @@ const LogInPage = ({navigation}) => {
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={[styles.button, styles.signUpButton]}
-          onPress={() => navigation.navigate('SignUp')}>
+          onPress={() => navigation.navigate(SIGN_UP)}>
           <Text style={styles.signUpButtonText}>Sign Up</Text>
         </TouchableOpacity>
         <TouchableOpacity
