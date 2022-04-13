@@ -3,7 +3,6 @@ import {signUpActions} from '../actions/signUpActions';
 import {call, put, takeEvery} from 'redux-saga/effects';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const {SIGNUP_REQUEST} = AUTH_ACTIONS_TYPES;
 const {signUpSuccess, signUpFailure} = signUpActions;
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -53,7 +52,7 @@ function* signUpWorker(action) {
 }
 
 function* signUpWatcher() {
-  yield takeEvery(SIGNUP_REQUEST, signUpWorker);
+  yield takeEvery(AUTH_ACTIONS_TYPES.SIGNUP_REQUEST, signUpWorker);
 }
 
 export default signUpWatcher;

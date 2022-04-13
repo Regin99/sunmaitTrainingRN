@@ -19,8 +19,6 @@ import PAGES from '../pages';
 
 const {logInRequest} = loginActions;
 
-const {SIGN_UP} = PAGES;
-
 const icons = {
   secured: {
     uri: 'https://cdn-icons.flaticon.com/png/512/2767/premium/2767194.png?token=exp=1649726743~hmac=6fa54ef21299d84f97bb9f800db5809f',
@@ -89,7 +87,7 @@ const LogInPage = ({navigation}) => {
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={[styles.button, styles.signUpButton]}
-          onPress={() => navigation.navigate(SIGN_UP)}>
+          onPress={() => navigation.navigate(PAGES.SIGN_UP)}>
           <Text style={styles.signUpButtonText}>Sign Up</Text>
         </TouchableOpacity>
         <TouchableOpacity

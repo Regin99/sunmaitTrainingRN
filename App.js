@@ -114,7 +114,6 @@ const App = () => {
 };
 
 const AppWrapper = () => {
-  //isThisGoodPractice?
   return (
     <Provider store={store}>
       <App />

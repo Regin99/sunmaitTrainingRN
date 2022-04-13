@@ -25,7 +25,6 @@ import {signUpActions} from '../../redux/actions/signUpActions';
 import PAGES from '../pages';
 
 const {signUpRequest} = signUpActions;
-const {PRIVACY_MODAL} = PAGES;
 
 const icons = {
   secured: {
@@ -236,7 +235,7 @@ const SignUpPage = ({navigation}) => {
               <View style={styles.privacyText}>
                 <Text>I accept the </Text>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate(PRIVACY_MODAL)}>
+                  onPress={() => navigation.navigate(PAGES.PRIVACY_MODAL)}>
                   <Text style={styles.underline}>Privacy policy</Text>
                 </TouchableOpacity>
               </View>
@@ -256,10 +255,10 @@ const SignUpPage = ({navigation}) => {
         ]}
         onPress={() => {
           const userData = {
-            number: number,
-            email: email,
-            password: password,
-            avatar: avatar,
+            email,
+            number,
+            password,
+            avatar,
           };
           nextAlert(userData);
         }}

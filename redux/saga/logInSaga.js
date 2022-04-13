@@ -3,7 +3,6 @@ import {loginActions} from '../actions/logInActions';
 import {put, call, takeEvery} from 'redux-saga/effects';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const {LOGIN_REQUEST} = AUTH_ACTIONS_TYPES;
 const {logInSuccess, logInFailure} = loginActions;
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -45,7 +44,7 @@ function* logInWorker(action) {
 }
 
 function* logInWatcher() {
-  yield takeEvery(LOGIN_REQUEST, logInWorker);
+  yield takeEvery(AUTH_ACTIONS_TYPES.LOGIN_REQUEST, logInWorker);
 }
 
 export default logInWatcher;

@@ -1,18 +1,16 @@
 import {AUTH_ACTIONS_TYPES} from '../types';
 
-const {SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE} = AUTH_ACTIONS_TYPES;
-
 const signUpRequest = userData => ({
-  type: SIGNUP_REQUEST,
+  type: AUTH_ACTIONS_TYPES.SIGNUP_REQUEST,
   payload: userData,
 });
 const signUpSuccess = userData => ({
-  type: SIGNUP_SUCCESS,
+  type: AUTH_ACTIONS_TYPES.SIGNUP_SUCCESS,
   payload: userData,
 });
 
 const signUpFailure = error => ({
-  type: SIGNUP_FAILURE,
+  type: AUTH_ACTIONS_TYPES.SIGNUP_FAILURE,
   payload: error,
 });
 

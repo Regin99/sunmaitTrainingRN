@@ -8,37 +8,25 @@ const initialState = {
 };
 
 const authReducer = (state = initialState, action) => {
-  const {
-    LOGIN_REQUEST,
-    LOGIN_SUCCESS,
-    LOGIN_FAILURE,
-    SIGNUP_REQUEST,
-    SIGNUP_SUCCESS,
-    SIGNUP_FAILURE,
-    LOGOUT_REQUEST,
-    LOGOUT_SUCCESS,
-    LOGOUT_FAILURE,
-  } = AUTH_ACTIONS_TYPES;
-
   switch (action.type) {
-    case LOGIN_REQUEST:
-    case SIGNUP_REQUEST:
-    case LOGOUT_REQUEST:
+    case AUTH_ACTIONS_TYPES.LOGIN_REQUEST:
+    case AUTH_ACTIONS_TYPES.SIGNUP_REQUEST:
+    case AUTH_ACTIONS_TYPES.LOGOUT_REQUEST:
       return {
         ...state,
         isLoading: true,
         isLoggIn: false,
       };
-    case LOGIN_FAILURE:
-    case SIGNUP_FAILURE:
-    case LOGOUT_FAILURE:
+    case AUTH_ACTIONS_TYPES.LOGIN_FAILURE:
+    case AUTH_ACTIONS_TYPES.SIGNUP_FAILURE:
+    case AUTH_ACTIONS_TYPES.LOGOUT_FAILURE:
       return {
         ...state,
         isLoading: false,
         error: action.payload,
         isLoggIn: false,
       };
-    case LOGIN_SUCCESS:
+    case AUTH_ACTIONS_TYPES.LOGIN_SUCCESS:
       return {
         ...state,
         isLoading: false,
@@ -47,7 +35,7 @@ const authReducer = (state = initialState, action) => {
         user: action.payload,
       };
 
-    case SIGNUP_SUCCESS:
+    case AUTH_ACTIONS_TYPES.SIGNUP_SUCCESS:
       return {
         ...state,
         isLoading: false,
@@ -56,7 +44,7 @@ const authReducer = (state = initialState, action) => {
         isLoggIn: true,
         user: action.payload,
       };
-    case LOGOUT_SUCCESS:
+    case AUTH_ACTIONS_TYPES.LOGOUT_SUCCESS:
       return {
         ...state,
         isLoading: false,
