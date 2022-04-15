@@ -11,7 +11,7 @@ import {
 
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
-const UploadPhoto = ({avatarValue, setAvatarValue}) => {
+const UploadPhoto = ({avatar, setAvatar}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const getImage = response => {
@@ -23,20 +23,15 @@ const UploadPhoto = ({avatarValue, setAvatarValue}) => {
     } else if (response.customButton) {
       console.log('User tapped custom button: ', response.customButton);
     } else {
-      setAvatarValue({uri: response.assets[0].uri});
+      setAvatar({uri: response.assets[0].uri});
     }
   };
 
   const selectImage = option => {
-    switch (option) {
-      case 'camera':
-        launchCamera({}, getImage);
-        break;
-      case 'gallery':
-        launchImageLibrary({}, getImage);
-        break;
-      default:
-        break;
+    if (option === 'camera') {
+      launchCamera({}, getImage);
+    } else {
+      launchImageLibrary({}, getImage);
     }
   };
 
@@ -46,7 +41,7 @@ const UploadPhoto = ({avatarValue, setAvatarValue}) => {
       onPress={() => {
         setIsModalVisible(!isModalVisible);
       }}>
-      <Image style={styles.avatarIcon} source={avatarValue} />
+      <Image style={styles.avatarIcon} source={avatar} />
       <Text>Upload a photo</Text>
       <Modal
         visible={isModalVisible}
