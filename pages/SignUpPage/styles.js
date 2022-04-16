@@ -1,4 +1,6 @@
 import {StyleSheet} from 'react-native';
+import {COLORS} from '../../constants/styleConstans';
+
 const styles = StyleSheet.create({
   safeAreaViewContainer: {
     flex: 1,
@@ -17,7 +19,7 @@ const styles = StyleSheet.create({
   },
   input: {
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderBottomColor: COLORS.grey,
     padding: 10,
     marginBottom: 10,
   },
@@ -26,17 +28,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderBottomColor: COLORS.grey,
     maxWidth: '100%',
   },
   passwordInput: {
     marginBottom: 10,
     padding: 10,
     maxWidth: '80%',
-  },
-  iconImage: {
-    width: 30,
-    height: 30,
   },
 
   privacyContainer: {
@@ -51,14 +49,14 @@ const styles = StyleSheet.create({
   },
   underline: {
     textDecorationLine: 'underline',
-    color: '#00a680',
+    color: COLORS.blue,
   },
 
   button: {
     width: '20%',
     height: '5%',
     borderWidth: 1,
-    borderColor: '#1C00FF',
+    borderColor: COLORS.blue,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
@@ -67,14 +65,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   buttonInactive: {
-    backgroundColor: '#f2f2f2',
+    backgroundColor: COLORS.white,
   },
   buttonActive: {
-    backgroundColor: '#1C00FF',
-    color: '#ccc',
+    backgroundColor: COLORS.blue,
+    color: COLORS.grey,
   },
   buttonText: {
-    color: '#ccc',
+    color: COLORS.grey,
   },
 });
 export default styles;

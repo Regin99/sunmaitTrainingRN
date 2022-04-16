@@ -1,11 +1,13 @@
 import {StyleSheet} from 'react-native';
+import {COLORS} from '../../constants/styleConstans';
+
 const styles = StyleSheet.create({
   checkbox: {
     width: 15,
     height: 15,
     borderWidth: 2,
-    borderColor: '#1C00FF',
-    backgroundColor: '#fff',
+    borderColor: COLORS.blue,
+    backgroundColor: COLORS.white,
     alignItems: 'center',
     justifyContent: 'center',
     boxSizing: 'border-box',
@@ -17,13 +19,13 @@ const styles = StyleSheet.create({
     borderRadius: 2,
   },
   checked: {
-    backgroundColor: '#1C00FF',
+    backgroundColor: COLORS.blue,
   },
   checkboxInner: {
     width: 9,
     height: 9,
     borderWidth: 2,
-    borderColor: '#fff',
+    borderColor: COLORS.white,
     borderLeftWidth: 0,
     borderTopWidth: 0,
     borderBottomLeftRadius: 7,

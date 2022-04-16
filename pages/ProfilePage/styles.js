@@ -1,63 +1,65 @@
 import {StyleSheet} from 'react-native';
-import {colors, sizes, fonts} from '../../constants/styleConstans';
+
+import {COLORS, SIZES, FONTS} from '../../constants/styleConstans';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
   },
   centeredContainer: {
-    marginTop: sizes.l,
+    marginTop: SIZES.l,
     justifyContent: 'center',
     alignItems: 'center',
   },
   containerThemed: {
     light: {
-      backgroundColor: colors.white,
-      color: colors.black,
+      backgroundColor: COLORS.white,
+      color: COLORS.black,
     },
     dark: {
-      backgroundColor: colors.darkGrey,
-      color: colors.white,
+      backgroundColor: COLORS.darkGrey,
+      color: COLORS.white,
     },
   },
   button: {
     flexDirection: 'row',
-    padding: sizes.s,
+    padding: SIZES.s,
     alignItems: 'center',
   },
   text: {
-    fontFamily: fonts.Raleway,
-    fontSize: sizes.m,
+    fontFamily: FONTS.Raleway,
+    fontSize: SIZES.m,
   },
   textThemed: {
     light: {
-      color: colors.black,
-      backgroundColor: colors.white,
+      color: COLORS.black,
+      backgroundColor: COLORS.white,
     },
     dark: {
-      color: colors.white,
-      backgroundColor: colors.darkGrey,
+      color: COLORS.white,
+      backgroundColor: COLORS.darkGrey,
     },
   },
   email: {
-    marginTop: sizes.l,
+    marginTop: SIZES.l,
   },
   buttonText: {
-    fontFamily: fonts.Raleway,
-    marginLeft: sizes.m,
+    fontFamily: FONTS.Raleway,
+    marginLeft: SIZES.m,
   },
   buttonTextThemed: {
     light: {
-      color: colors.black,
+      color: COLORS.black,
     },
     dark: {
-      color: colors.white,
+      color: COLORS.white,
     },
   },
   logOutButton: {
     alignItems: 'center',
-    padding: sizes.s,
-    marginBottom: sizes.l,
+    padding: SIZES.s,
+    marginBottom: SIZES.l,
   },
 });
 export default styles;

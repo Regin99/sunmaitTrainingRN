@@ -7,7 +7,7 @@ import PrivacyModal from '../pages/PrivacyModal/PrivacyModal';
 
 import BackArrow from '../components/BackArrow/BackArrow';
 
-import {colors, sizes} from '../constants/styleConstans';
+import {COLORS, SIZES} from '../constants/styleConstans';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,14 +17,13 @@ const AuthStack = () => {
     headerLeft: () => (
       <BackArrow
         onPress={navigation.navigation.goBack}
-        width={35}
-        height={35}
-        color={colors.blue}
+        size={35}
+        color={COLORS.blue}
       />
     ),
     headerTitleStyle: {
       fontWeight: 'bold',
-      fontSize: sizes.l,
+      fontSize: SIZES.l,
     },
   });
 

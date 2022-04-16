@@ -13,7 +13,7 @@ import PAGES from '../pages';
 
 import HiddenIcon from '../../assets/HiddenIcon';
 
-import {colors} from '../../constants/styleConstans';
+import {COLORS} from '../../constants/styleConstans';
 
 const {logInRequest} = loginActions;
 
@@ -69,7 +69,7 @@ const LogInPage = ({navigation}) => {
             <HiddenIcon
               width={30}
               height={30}
-              fill={isPasswordSecure ? colors.black : colors.blue}
+              fill={isPasswordSecure ? COLORS.black : COLORS.blue}
             />
           </TouchableOpacity>
         </View>

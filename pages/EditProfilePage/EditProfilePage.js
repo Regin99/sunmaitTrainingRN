@@ -3,7 +3,7 @@ import {View, TextInput, Text, TouchableOpacity} from 'react-native';
 import {useSelector} from 'react-redux';
 
 import ThemeContext from '../../Contexts/ThemeContext';
-import {colors} from '../../constants/styleConstans';
+import {COLORS} from '../../constants/styleConstans';
 import styles from './styles';
 
 const EditProfilePage = ({navigation}) => {
@@ -19,11 +19,8 @@ const EditProfilePage = ({navigation}) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}>
-          <Text style={{color: colors.blue}}>Done</Text>
+        <TouchableOpacity onPress={navigation.goBack}>
+          <Text style={styles.done}>Done</Text>
         </TouchableOpacity>
       ),
     });
@@ -32,52 +29,52 @@ const EditProfilePage = ({navigation}) => {
   return (
     <View style={[styles.container, styles.containerThemed[theme]]}>
       <Text style={styles.label}>PUBLIC PROFILE</Text>
-      <View style={[styles.itemContainerThemed[theme], styles.itemContainer]}>
+      <View style={[styles.itemThemed[theme], styles.itemContainer]}>
         <View style={styles.inputContainer}>
-          <Text style={[styles.textThemed[theme], styles.text]}>
+          <Text style={[styles.itemThemed[theme], styles.text]}>
             First name
           </Text>
           <TextInput
             placeholder="First name"
-            placeholderTextColor={colors.grey}
+            placeholderTextColor={COLORS.grey}
             value={firstName}
             onChangeText={setFirstName}
-            style={[styles.textThemed[theme], styles.text]}
+            style={[styles.itemThemed[theme], styles.text]}
           />
         </View>
         <View style={styles.inputContainer}>
-          <Text style={[styles.textThemed[theme], styles.text]}>Last Name</Text>
+          <Text style={[styles.itemThemed[theme], styles.text]}>Last Name</Text>
           <TextInput
             placeholder="Last name"
-            placeholderTextColor={colors.grey}
+            placeholderTextColor={COLORS.grey}
             value={lastName}
             onChangeText={setLastName}
-            style={[styles.textThemed[theme], styles.text]}
+            style={[styles.itemThemed[theme], styles.text]}
           />
         </View>
       </View>
       <Text style={[styles.label]}>PRIVATE DETAILS</Text>
-      <View style={[styles.itemContainerThemed[theme], styles.itemContainer]}>
+      <View style={[styles.itemThemed[theme], styles.itemContainer]}>
         <View style={styles.inputContainer}>
-          <Text style={[styles.textThemed[theme], styles.text]}>Email</Text>
+          <Text style={[styles.itemThemed[theme], styles.text]}>Email</Text>
           <TextInput
             placeholder="Your email"
-            placeholderTextColor={colors.grey}
+            placeholderTextColor={COLORS.grey}
             value={email}
             onChangeText={setEmail}
-            style={[styles.textThemed[theme], styles.text]}
+            style={[styles.itemThemed[theme], styles.text]}
           />
         </View>
         <View style={styles.inputContainer}>
-          <Text style={[styles.textThemed[theme], styles.text]}>
+          <Text style={[styles.itemThemed[theme], styles.text]}>
             Phone Number
           </Text>
           <TextInput
             placeholder="Your phone number"
-            placeholderTextColor={colors.grey}
+            placeholderTextColor={COLORS.grey}
             value={number}
             onChangeText={setNumber}
-            style={[styles.textThemed[theme], styles.text]}
+            style={[styles.itemThemed[theme], styles.text]}
           />
         </View>
       </View>

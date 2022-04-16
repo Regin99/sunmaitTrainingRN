@@ -6,30 +6,25 @@ import EditProfilePage from '../pages/EditProfilePage/EditProfilePage';
 import SettingsPage from '../pages/SettingsPage/SettingsPage';
 
 import BackArrow from '../components/BackArrow/BackArrow';
-import {colors} from '../constants/styleConstans';
+import {COLORS} from '../constants/styleConstans';
 
 import ThemeContext from '../Contexts/ThemeContext';
 
 const Stack = createNativeStackNavigator();
 
 const MainStack = () => {
-  const {isDark} = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
 
-  const screensOptions = navigation => ({
+  const screensOptions = ({navigation}) => ({
     headerStyle: {
-      backgroundColor: isDark ? colors.darkGrey : colors.white,
+      backgroundColor: theme === 'dark' ? COLORS.darkGrey : COLORS.white,
     },
     headerTitleStyle: {
-      color: isDark ? colors.white : colors.black,
+      color: theme === 'dark' ? COLORS.white : COLORS.black,
     },
     headerTitleAlign: 'center',
     headerLeft: () => (
-      <BackArrow
-        onPress={navigation.navigation.goBack}
-        width={35}
-        height={35}
-        color={colors.blue}
-      />
+      <BackArrow onPress={navigation.goBack} size={35} color={COLORS.blue} />
     ),
   });
   return (

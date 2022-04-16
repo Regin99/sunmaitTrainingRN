@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import ThemeContext from '../Contexts/ThemeContext';
-import {colors, sizes} from '../constants/styleConstans';
+import {COLORS, SIZES} from '../constants/styleConstans';
 
 //pages
 import HomePage from '../pages/HomePage/HomePage';
@@ -14,8 +14,8 @@ import BottomIcon from '../components/BottomIcon/BottomIcon';
 const BottomTab = createBottomTabNavigator();
 
 const TabsStack = () => {
-  const {isDark} = useContext(ThemeContext);
-  
+  const {theme} = useContext(ThemeContext);
+
   const bottomStackOptions = ({route}) => ({
     tabBarIcon: ({focused}) => {
       let iconName;
@@ -29,21 +29,21 @@ const TabsStack = () => {
       return <BottomIcon name={iconName} />;
     },
     headerStyle: {
-      backgroundColor: isDark ? colors.darkGrey : colors.white,
+      backgroundColor: theme === 'dark' ? COLORS.darkGrey : COLORS.white,
     },
     headerTitleStyle: {
-      color: isDark ? colors.white : colors.darkGrey,
+      color: theme === 'dark' ? COLORS.white : COLORS.darkGrey,
     },
     headerTitleAlign: 'center',
     tabBarStyle: {
       height: 80,
       justifyContent: 'space-between',
-      paddingTop: sizes.ms,
-      paddingBottom: sizes.ms,
-      backgroundColor: isDark ? colors.darkGrey : colors.white,
+      paddingTop: SIZES.ms,
+      paddingBottom: SIZES.ms,
+      backgroundColor: theme === 'dark' ? COLORS.darkGrey : COLORS.white,
     },
     tabBarLabelStyle: {
-      fontSize: sizes.ms,
+      fontSize: SIZES.ms,
       fontWeight: 'bold',
     },
   });

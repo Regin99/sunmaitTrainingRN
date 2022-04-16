@@ -2,7 +2,7 @@ import * as React from 'react';
 import Svg, {G, Path} from 'react-native-svg';
 /* SVGR has dropped some elements not supported by react-native-svg: style */
 
-function HiddenIcon(props) {
+const HiddenIcon = props => {
   return (
     <Svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" {...props}>
       <G id="hide">
@@ -18,6 +18,6 @@ function HiddenIcon(props) {
       </G>
     </Svg>
   );
-}
+};
 
 export default HiddenIcon;

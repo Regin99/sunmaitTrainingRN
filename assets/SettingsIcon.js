@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Svg, {G, Path} from 'react-native-svg';
 
-function SettingsIcon(props) {
+const SettingsIcon = props => {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
@@ -48,6 +48,6 @@ function SettingsIcon(props) {
       </G>
     </Svg>
   );
-}
+};
 
 export default SettingsIcon;

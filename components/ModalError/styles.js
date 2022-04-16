@@ -1,13 +1,15 @@
 import {StyleSheet} from 'react-native';
+import {COLORS} from '../../constants/styleConstans';
+
 const styles = StyleSheet.create({
   modal: {
     height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: COLORS.semiTransperent,
   },
   modalContent: {
-    backgroundColor: '#f2f2f2',
+    backgroundColor: COLORS.white,
     padding: 20,
     borderRadius: 10,
     minHeight: '30%',

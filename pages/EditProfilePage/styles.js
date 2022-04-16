@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
-import {colors, sizes, fonts} from '../../constants/styleConstans';
+
+import {COLORS, SIZES, FONTS} from '../../constants/styleConstans';
 
 const styles = StyleSheet.create({
   container: {
@@ -7,43 +8,44 @@ const styles = StyleSheet.create({
   },
   containerThemed: {
     light: {
-      backgroundColor: colors.lightGrey,
-      color: colors.black,
+      backgroundColor: COLORS.lightGrey,
     },
     dark: {
-      backgroundColor: colors.darkGrey,
-      color: colors.white,
+      backgroundColor: COLORS.darkGrey,
     },
   },
   text: {
-    fontFamily: fonts.Raleway,
-    fontSize: sizes.m,
+    fontFamily: FONTS.Raleway,
+    fontSize: SIZES.m,
   },
-  textThemed: {
+  done: {
+    color: COLORS.blue,
+  },
+  itemThemed: {
     light: {
-      color: colors.black,
-      backgroundColor: colors.white,
+      color: COLORS.black,
+      backgroundColor: COLORS.white,
     },
     dark: {
-      color: colors.white,
-      backgroundColor: colors.lightBlack,
+      color: COLORS.white,
+      backgroundColor: COLORS.lightBlack,
     },
   },
   inputContainer: {
     flexDirection: 'row',
-    padding: sizes.s,
+    padding: SIZES.s,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   label: {
-    fontFamily: fonts.Raleway,
-    fontSize: sizes.m,
-    padding: sizes.s,
-    marginTop: sizes.m,
-    color: colors.grey,
+    fontFamily: FONTS.Raleway,
+    fontSize: SIZES.m,
+    padding: SIZES.s,
+    marginTop: SIZES.m,
+    color: COLORS.grey,
   },
   itemContainer: {
-    shadowColor: colors.black,
+    shadowColor: COLORS.black,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -51,16 +53,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    marginBottom: sizes.xl,
-  },
-
-  itemContainerThemed: {
-    light: {
-      backgroundColor: colors.white,
-    },
-    dark: {
-      backgroundColor: colors.lightBlack,
-    },
+    marginBottom: SIZES.xl,
   },
 });
 

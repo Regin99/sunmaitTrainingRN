@@ -1,4 +1,6 @@
 import {StyleSheet} from 'react-native';
+import {COLORS} from '../../constants/styleConstans';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -11,10 +13,10 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     margin: 8,
     borderWidth: 6,
-    borderTopColor: '#1C00FF',
-    borderRightColor: 'transparent',
-    borderBottomColor: '#1C00FF',
-    borderLeftColor: 'transparent',
+    borderTopColor: COLORS.blue,
+    borderRightColor: COLORS.transperent,
+    borderBottomColor: COLORS.blue,
+    borderLeftColor: COLORS.transperent,
   },
 });
 export default styles;

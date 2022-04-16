@@ -7,7 +7,6 @@ import {
   Text,
   Alert,
   View,
-  Image,
   TextInput,
 } from 'react-native';
 import styles from './styles';
@@ -19,22 +18,16 @@ import Checkbox from '../../components/Checkbox/Checkbox';
 import Loader from '../../components/Loader/Loader';
 import ModalError from '../../components/ModalError/ModalError';
 
+import HiddenIcon from '../../assets/HiddenIcon';
+
 //redux
 import {useDispatch, useSelector} from 'react-redux';
 import {signUpActions} from '../../redux/actions/signUpActions';
 
 import PAGES from '../pages';
+import {COLORS} from '../../constants/styleConstans';
 
 const {signUpRequest} = signUpActions;
-
-const icons = {
-  secured: {
-    uri: 'https://cdn-icons.flaticon.com/png/512/2767/premium/2767194.png?token=exp=1649726743~hmac=6fa54ef21299d84f97bb9f800db5809f',
-  },
-  unsecured: {
-    uri: 'https://cdn-icons-png.flaticon.com/512/159/159604.png',
-  },
-};
 
 const SignUpPage = ({navigation}) => {
   const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(true);
@@ -213,9 +206,10 @@ const SignUpPage = ({navigation}) => {
               />
               <TouchableOpacity
                 onPress={() => setIsPasswordSecure(!isPasswordSecure)}>
-                <Image
-                  source={isPasswordSecure ? icons.secured : icons.unsecured}
-                  style={styles.iconImage}
+                <HiddenIcon
+                  width={30}
+                  height={30}
+                  fill={isPasswordSecure ? COLORS.black : COLORS.blue}
                 />
               </TouchableOpacity>
             </View>

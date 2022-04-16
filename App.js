@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Provider, useSelector} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 
@@ -20,14 +20,9 @@ const App = () => {
   const isLoggedIn = useSelector(state => state.auth.isLoggIn);
 
   const [theme, setTheme] = useState('light');
-  const [isDark, setIsDark] = useState(false);
-
-  useLayoutEffect(() => {
-    setTheme(isDark ? 'dark' : 'light');
-  }, [isDark]);
 
   return (
-    <ThemeContext.Provider value={{theme, isDark, setIsDark}}>
+    <ThemeContext.Provider value={{theme, setTheme}}>
       <NavigationContainer initialRouteName="LogIn">
         {isLoggedIn ? <MainStack /> : <AuthStack />}
       </NavigationContainer>

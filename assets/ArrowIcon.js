@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Svg, {Path} from 'react-native-svg';
 
-function ArrowIcon(props) {
+const ArrowIcon = props => {
   return (
     <Svg
       viewBox="0 0 100 100"
@@ -19,6 +19,6 @@ function ArrowIcon(props) {
       />
     </Svg>
   );
-}
+};
 
 export default ArrowIcon;
