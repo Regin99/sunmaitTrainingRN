@@ -1,17 +1,16 @@
 import React from 'react';
-import {Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {TouchableOpacity} from 'react-native';
+import ArrowIcon from '../../assets/ArrowIcon';
 
-const BackArrow = ({src, onPress}) => (
+const BackArrow = ({width, height, color, onPress}) => (
   <TouchableOpacity onPress={onPress}>
-    <Image source={src} style={styles.icon} />
+    <ArrowIcon
+      width={width}
+      height={height}
+      fill={color}
+      style={{transform: [{rotateY: '180deg'}]}}
+    />
   </TouchableOpacity>
 );
-
-const styles = StyleSheet.create({
-  icon: {
-    width: 30,
-    height: 30,
-  },
-});
 
 export default BackArrow;

@@ -19,6 +19,7 @@ const signUpUser = userData => {
           number,
           password,
           avatar,
+          id: Math.random(),
         };
         const usersArray = JSON.parse(result);
         if (usersArray) {
