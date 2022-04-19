@@ -6,11 +6,11 @@ import {
   TouchableOpacity,
   Text,
   Alert,
-  StyleSheet,
   View,
-  Image,
   TextInput,
 } from 'react-native';
+import styles from './styles';
+
 import TextInputMask from 'react-native-text-input-mask';
 
 import UploadPhoto from '../../components/UploadPhoto/UploadPhoto';
@@ -18,24 +18,18 @@ import Checkbox from '../../components/Checkbox/Checkbox';
 import Loader from '../../components/Loader/Loader';
 import ModalError from '../../components/ModalError/ModalError';
 
+import HiddenIcon from '../../assets/HiddenIcon';
+
 //redux
 import {useDispatch, useSelector} from 'react-redux';
 import {signUpActions} from '../../redux/actions/signUpActions';
 
 import PAGES from '../pages';
+import {COLORS} from '../../constants/styleConstans';
 
 const {signUpRequest} = signUpActions;
 
-const icons = {
-  secured: {
-    uri: 'https://cdn-icons.flaticon.com/png/512/2767/premium/2767194.png?token=exp=1649726743~hmac=6fa54ef21299d84f97bb9f800db5809f',
-  },
-  unsecured: {
-    uri: 'https://cdn-icons-png.flaticon.com/512/159/159604.png',
-  },
-};
-
-const SignUpPage = ({navigation}) => {
+const SignUp = ({navigation}) => {
   const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
@@ -163,7 +157,7 @@ const SignUpPage = ({navigation}) => {
   ]);
 
   return isLoading ? (
-    <Loader /> //спросить про это
+    <Loader />
   ) : (
     <SafeAreaView style={styles.safeAreaViewContainer}>
       <StatusBar barStyle={'light-content'} />
@@ -171,6 +165,7 @@ const SignUpPage = ({navigation}) => {
         <View style={styles.container}>
           <View style={styles.inputContainer}>
             <UploadPhoto avatar={avatar} setAvatar={setAvatar} />
+            <Text>Upload a photo</Text>
             <TextInput
               style={styles.input}
               value={email}
@@ -211,9 +206,10 @@ const SignUpPage = ({navigation}) => {
               />
               <TouchableOpacity
                 onPress={() => setIsPasswordSecure(!isPasswordSecure)}>
-                <Image
-                  source={isPasswordSecure ? icons.secured : icons.unsecured}
-                  style={styles.iconImage}
+                <HiddenIcon
+                  width={30}
+                  height={30}
+                  fill={isPasswordSecure ? COLORS.black : COLORS.blue}
                 />
               </TouchableOpacity>
             </View>
@@ -273,84 +269,4 @@ const SignUpPage = ({navigation}) => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  safeAreaViewContainer: {
-    flex: 1,
-  },
-
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  inputContainer: {
-    justifyContent: 'space-between',
-    width: '80%',
-    marginTop: 50,
-    marginBottom: 20,
-  },
-  input: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-    padding: 10,
-    marginBottom: 10,
-  },
-  passwordInputContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-    maxWidth: '100%',
-  },
-  passwordInput: {
-    marginBottom: 10,
-    padding: 10,
-    maxWidth: '80%',
-  },
-  iconImage: {
-    width: 30,
-    height: 30,
-  },
-
-  privacyContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 10,
-    marginTop: 20,
-  },
-  privacyText: {
-    flexDirection: 'row',
-  },
-  underline: {
-    textDecorationLine: 'underline',
-    color: '#00a680',
-  },
-
-  button: {
-    width: '20%',
-    height: '5%',
-    borderWidth: 1,
-    borderColor: '#1C00FF',
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 10,
-    marginBottom: 30,
-    alignSelf: 'center',
-  },
-  buttonInactive: {
-    backgroundColor: '#f2f2f2',
-  },
-  buttonActive: {
-    backgroundColor: '#1C00FF',
-    color: '#ccc',
-  },
-  buttonText: {
-    color: '#ccc',
-  },
-});
-
-export default SignUpPage;
+export default SignUp;

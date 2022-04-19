@@ -1,12 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {
-  TextInput,
-  TouchableOpacity,
-  Text,
-  View,
-  StyleSheet,
-  Image,
-} from 'react-native';
+import {TextInput, TouchableOpacity, Text, View} from 'react-native';
+import styles from './styles';
 
 import Loader from '../../components/Loader/Loader';
 import ModalError from '../../components/ModalError/ModalError';
@@ -17,18 +11,13 @@ import {useSelector} from 'react-redux';
 
 import PAGES from '../pages';
 
+import HiddenIcon from '../../assets/HiddenIcon';
+
+import {COLORS} from '../../constants/styleConstans';
+
 const {logInRequest} = loginActions;
 
-const icons = {
-  secured: {
-    uri: 'https://cdn-icons.flaticon.com/png/512/2767/premium/2767194.png?token=exp=1649726743~hmac=6fa54ef21299d84f97bb9f800db5809f',
-  },
-  unsecured: {
-    uri: 'https://cdn-icons-png.flaticon.com/512/159/159604.png',
-  },
-};
-
-const LogInPage = ({navigation}) => {
+const LogIn = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -77,9 +66,10 @@ const LogInPage = ({navigation}) => {
           />
           <TouchableOpacity
             onPress={() => setIsPasswordSecure(!isPasswordSecure)}>
-            <Image
-              source={isPasswordSecure ? icons.secured : icons.unsecured}
-              style={styles.iconImage}
+            <HiddenIcon
+              width={30}
+              height={30}
+              fill={isPasswordSecure ? COLORS.black : COLORS.blue}
             />
           </TouchableOpacity>
         </View>
@@ -115,65 +105,4 @@ const LogInPage = ({navigation}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  inputContainer: {
-    justifyContent: 'space-between',
-    width: '80%',
-    marginBottom: 20,
-  },
-  emailInput: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-    padding: 10,
-  },
-  passwordInput: {
-    padding: 10,
-    maxWidth: '80%',
-  },
-  passwordContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-    maxWidth: '100%',
-  },
-  iconImage: {
-    width: 30,
-    height: 30,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '80%',
-  },
-  button: {
-    borderRadius: 10,
-  },
-  signUpButton: {
-    backgroundColor: '#1C00FF',
-    padding: 10,
-  },
-  logInButton: {
-    borderWidth: 1,
-    borderColor: '#1C00FF',
-    padding: 10,
-  },
-  signUpButtonText: {
-    color: '#f2f2f2',
-  },
-  logInButtonText: {
-    color: '#1C00FF',
-  },
-  disabled: {
-    borderColor: '#ccc',
-    color: '#ccc',
-  },
-});
-
-export default LogInPage;
+export default LogIn;

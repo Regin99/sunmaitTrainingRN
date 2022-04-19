@@ -5,6 +5,7 @@ const PAGES = {
   SEARCH: 'Search',
   PROFILE: 'Profile',
   PRIVACY_MODAL: 'PrivacyModal',
+  SETTINGS: 'Settings',
+  EDIT_PROFILE: 'EditProfile',
 };
-
 export default PAGES;

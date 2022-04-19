@@ -14,13 +14,14 @@ const signUpUser = userData => {
       if (err) {
         reject(err);
       } else {
+        const usersArray = JSON.parse(result);
         const newUser = {
+          id: usersArray.length + 1,
           email,
           number,
           password,
           avatar,
         };
-        const usersArray = JSON.parse(result);
         if (usersArray) {
           if (usersArray.some(user => user.email === newUser.email)) {
             reject(new Error('User with this email already exists'));
