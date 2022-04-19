@@ -5,8 +5,8 @@ const SettingsIcon = props => {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
-      width={256}
-      height={256}
+      width={props.size || 256}
+      height={props.size || 256}
       viewBox="0 0 256 256"
       {...props}>
       <G

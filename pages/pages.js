@@ -8,5 +8,4 @@ const PAGES = {
   SETTINGS: 'Settings',
   EDIT_PROFILE: 'EditProfile',
 };
-
 export default PAGES;

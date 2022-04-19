@@ -29,7 +29,7 @@ import {COLORS} from '../../constants/styleConstans';
 
 const {signUpRequest} = signUpActions;
 
-const SignUpPage = ({navigation}) => {
+const SignUp = ({navigation}) => {
   const [isNextButtonDisabled, setIsNextButtonDisabled] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
@@ -269,4 +269,4 @@ const SignUpPage = ({navigation}) => {
     </SafeAreaView>
   );
 };
-export default SignUpPage;
+export default SignUp;

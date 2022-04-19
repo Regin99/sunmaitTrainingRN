@@ -2,12 +2,12 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import styles from './styles';
 
-const SearchPage = ({navigation}) => {
+const Home = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <Text>SearchPage</Text>
+      <Text>HomePage</Text>
     </View>
   );
 };
 
-export default SearchPage;
+export default Home;

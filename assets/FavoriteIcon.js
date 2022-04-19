@@ -7,6 +7,8 @@ const FavoriteIcon = props => {
       xmlns="http://www.w3.org/2000/svg"
       x="0px"
       y="0px"
+      width={props.size || 495}
+      height={props.size || 495}
       viewBox="0 0 495 495"
       xmlSpace="preserve"
       enableBackground="new 0 0 495 495"

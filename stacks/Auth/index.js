@@ -1,30 +1,26 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import LogInPage from '../pages/LogInPage/LogInPage';
-import SignUpPage from '../pages/SignUpPage/SignUpPage';
-import PrivacyModal from '../pages/PrivacyModal/PrivacyModal';
+//pages
+import LogIn from '../../pages/LogIn';
+import SignUp from '../../pages/SignUp';
+import PrivacyModal from '../../pages/PrivacyModal';
 
-import BackArrow from '../components/BackArrow/BackArrow';
+import BackArrow from '../../components/BackArrow/BackArrow';
 
-import {COLORS, SIZES} from '../constants/styleConstans';
+import {COLORS} from '../../constants/styleConstans';
+
+import styles from './styles';
 
 const Stack = createNativeStackNavigator();
 
-const AuthStack = () => {
-  const signUpOptions = navigation => ({
+const Auth = () => {
+  const signUpOptions = ({navigation}) => ({
     title: 'Sign Up',
     headerLeft: () => (
-      <BackArrow
-        onPress={navigation.navigation.goBack}
-        size={35}
-        color={COLORS.blue}
-      />
+      <BackArrow onPress={navigation.goBack} size={35} color={COLORS.blue} />
     ),
-    headerTitleStyle: {
-      fontWeight: 'bold',
-      fontSize: SIZES.l,
-    },
+    headerTitleStyle: styles.headerTitle,
   });
 
   return (
@@ -32,14 +28,14 @@ const AuthStack = () => {
       <Stack.Group>
         <Stack.Screen
           name="LogIn"
-          component={LogInPage}
+          component={LogIn}
           options={{
             headerShown: false,
           }}
         />
         <Stack.Screen
           name="SignUp"
-          component={SignUpPage}
+          component={SignUp}
           options={signUpOptions}
         />
       </Stack.Group>
@@ -53,4 +49,4 @@ const AuthStack = () => {
     </Stack.Navigator>
   );
 };
-export default AuthStack;
+export default Auth;

@@ -1,27 +1,26 @@
 import React, {useContext} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import TabsStack from './TabsStack';
-import EditProfilePage from '../pages/EditProfilePage/EditProfilePage';
-import SettingsPage from '../pages/SettingsPage/SettingsPage';
+import TabsStack from '../Tabs';
+//pages
+import EditProfile from '../../pages/EditProfile';
+import Settings from '../../pages/Settings';
 
-import BackArrow from '../components/BackArrow/BackArrow';
-import {COLORS} from '../constants/styleConstans';
+import BackArrow from '../../components/BackArrow/BackArrow';
+import {COLORS} from '../../constants/styleConstans';
 
-import ThemeContext from '../Contexts/ThemeContext';
+import ThemeContext from '../../Contexts/ThemeContext';
+
+import styles from './styles';
 
 const Stack = createNativeStackNavigator();
 
-const MainStack = () => {
+const Main = () => {
   const {theme} = useContext(ThemeContext);
 
   const screensOptions = ({navigation}) => ({
-    headerStyle: {
-      backgroundColor: theme === 'dark' ? COLORS.darkGrey : COLORS.white,
-    },
-    headerTitleStyle: {
-      color: theme === 'dark' ? COLORS.white : COLORS.black,
-    },
+    headerStyle: styles.themedBG[theme],
+    headerTitleStyle: styles.headerTitle[theme],
     headerTitleAlign: 'center',
     headerLeft: () => (
       <BackArrow onPress={navigation.goBack} size={35} color={COLORS.blue} />
@@ -39,15 +38,15 @@ const MainStack = () => {
       <Stack.Screen
         name="EditProfile"
         options={screensOptions}
-        component={EditProfilePage}
+        component={EditProfile}
       />
       <Stack.Screen
         name="Settings"
         options={screensOptions}
-        component={SettingsPage}
+        component={Settings}
       />
     </Stack.Navigator>
   );
 };
 
-export default MainStack;
+export default Main;

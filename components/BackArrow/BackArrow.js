@@ -4,12 +4,7 @@ import ArrowIcon from '../../assets/ArrowIcon';
 
 const BackArrow = ({size, color, onPress}) => (
   <TouchableOpacity onPress={onPress}>
-    <ArrowIcon
-      width={size}
-      height={size}
-      fill={color}
-      style={{transform: [{rotateY: '180deg'}]}}
-    />
+    <ArrowIcon size={size} fill={color} />
   </TouchableOpacity>
 );
 

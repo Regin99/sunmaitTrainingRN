@@ -6,7 +6,7 @@ import ThemeContext from '../../Contexts/ThemeContext';
 import {COLORS} from '../../constants/styleConstans';
 import styles from './styles';
 
-const EditProfilePage = ({navigation}) => {
+const EditProfile = ({navigation}) => {
   const {theme} = useContext(ThemeContext);
 
   const userData = useSelector(state => state.auth.user);
@@ -82,4 +82,4 @@ const EditProfilePage = ({navigation}) => {
   );
 };
 
-export default EditProfilePage;
+export default EditProfile;

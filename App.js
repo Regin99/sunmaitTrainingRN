@@ -13,18 +13,18 @@ import {NavigationContainer} from '@react-navigation/native';
 import {store} from './redux/store';
 
 import ThemeContext from './Contexts/ThemeContext';
-import MainStack from './stacks/MainStack';
-import AuthStack from './stacks/AuthStack';
+//stacks
+import Main from './stacks/Main';
+import Auth from './stacks/Auth';
 
 const App = () => {
   const isLoggedIn = useSelector(state => state.auth.isLoggIn);
-
   const [theme, setTheme] = useState('light');
 
   return (
     <ThemeContext.Provider value={{theme, setTheme}}>
       <NavigationContainer initialRouteName="LogIn">
-        {isLoggedIn ? <MainStack /> : <AuthStack />}
+        {isLoggedIn ? <Main /> : <Auth />}
       </NavigationContainer>
     </ThemeContext.Provider>
   );

@@ -17,7 +17,7 @@ import {COLORS} from '../../constants/styleConstans';
 
 const {logInRequest} = loginActions;
 
-const LogInPage = ({navigation}) => {
+const LogIn = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -105,4 +105,4 @@ const LogInPage = ({navigation}) => {
   );
 };
 
-export default LogInPage;
+export default LogIn;

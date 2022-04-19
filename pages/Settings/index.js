@@ -4,7 +4,7 @@ import {View, Text, TouchableOpacity, Switch} from 'react-native';
 import ThemeContext from '../../Contexts/ThemeContext';
 import styles from './styles';
 
-const SettingsPage = () => {
+const Settings = () => {
   const {theme, setTheme} = useContext(ThemeContext);
 
   const switchTheme = () => {
@@ -43,4 +43,4 @@ const SettingsPage = () => {
   );
 };
 
-export default SettingsPage;
+export default Settings;

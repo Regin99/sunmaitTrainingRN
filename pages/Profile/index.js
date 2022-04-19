@@ -1,6 +1,5 @@
 import React, {useContext} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
-import styles from './styles';
 
 import UploadPhoto from '../../components/UploadPhoto/UploadPhoto';
 
@@ -16,9 +15,11 @@ import ProfileIcon from '../../assets/ProfileIcon.js';
 import FavoriteIcon from '../../assets/FavoriteIcon.js';
 import SettingsIcon from '../../assets/SettingsIcon';
 
+import styles from './styles';
+
 const {logOutRequest} = logOutActions;
 
-const ProfilePage = ({navigation}) => {
+const Profile = ({navigation}) => {
   const dispatch = useDispatch();
   const {avatar, email} = useSelector(state => state.auth.user);
   const {theme} = useContext(ThemeContext);
@@ -32,7 +33,7 @@ const ProfilePage = ({navigation}) => {
       </View>
       <View>
         <View style={styles.button}>
-          <FavoriteIcon width={20} height={20} />
+          <FavoriteIcon size={20} />
           <TouchableOpacity>
             <Text style={[styles.buttonText, styles.buttonTextThemed[theme]]}>
               My Favorites
@@ -40,7 +41,8 @@ const ProfilePage = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.button}>
-          <ProfileIcon width={20} height={20} />
+          <ProfileIcon size={20} />
+
           <TouchableOpacity
             onPress={() => navigation.navigate(PAGES.EDIT_PROFILE)}>
             <Text style={[styles.buttonText, styles.buttonTextThemed[theme]]}>
@@ -49,7 +51,7 @@ const ProfilePage = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.button}>
-          <SettingsIcon width={20} height={20} />
+          <SettingsIcon size={20} />
           <TouchableOpacity onPress={() => navigation.navigate(PAGES.SETTINGS)}>
             <Text style={[styles.buttonText, styles.buttonTextThemed[theme]]}>
               Settings
@@ -68,4 +70,4 @@ const ProfilePage = ({navigation}) => {
   );
 };
 
-export default ProfilePage;
+export default Profile;
