@@ -5,7 +5,16 @@ const styles = StyleSheet.create({
   safeAreaViewContainer: {
     flex: 1,
   },
-
+  themed: {
+    light: {
+      backgroundColor: COLORS.white,
+      color: COLORS.black,
+    },
+    dark: {
+      backgroundColor: COLORS.lightBlack,
+      color: COLORS.white,
+    },
+  },
   container: {
     flex: 1,
     justifyContent: 'center',

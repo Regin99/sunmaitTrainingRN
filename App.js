@@ -6,34 +6,36 @@
  * @flow strict-local
  */
 
-import React, {useState} from 'react';
+import React from 'react';
 import {Provider, useSelector} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 
-import {store} from './redux/store';
+import {PersistGate} from 'redux-persist/integration/react';
 
-import ThemeContext from './Contexts/ThemeContext';
+import {store, persistor} from './redux/store';
+
 //stacks
 import Main from './stacks/Main';
 import Auth from './stacks/Auth';
 
+import Loader from './components/Loader/Loader';
+
 const App = () => {
   const isLoggedIn = useSelector(state => state.auth.isLoggIn);
-  const [theme, setTheme] = useState('light');
 
   return (
-    <ThemeContext.Provider value={{theme, setTheme}}>
-      <NavigationContainer initialRouteName="LogIn">
-        {isLoggedIn ? <Main /> : <Auth />}
-      </NavigationContainer>
-    </ThemeContext.Provider>
+    <NavigationContainer initialRouteName="LogIn">
+      {isLoggedIn ? <Main /> : <Auth />}
+    </NavigationContainer>
   );
 };
 
 const AppWrapper = () => {
   return (
     <Provider store={store}>
-      <App />
+      <PersistGate loading={<Loader />} persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   );
 };

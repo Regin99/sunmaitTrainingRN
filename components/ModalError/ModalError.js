@@ -21,7 +21,7 @@ const ModalError = ({error, isModalVisible, setIsModalVisible}) => {
           <View style={styles.modalContent}>
             <>
               <Text style={styles.modalText}>Error</Text>
-              <Text style={styles.modalText}>{error}</Text>
+              <Text style={styles.modalText}>{error?.message}</Text>
             </>
           </View>
         </View>

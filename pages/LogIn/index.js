@@ -1,5 +1,5 @@
-import React, {useState, useRef, useEffect} from 'react';
-import {TextInput, TouchableOpacity, Text, View} from 'react-native';
+import React, {useState, useRef, useEffect, useLayoutEffect} from 'react';
+import {TextInput, TouchableOpacity, Text, View, Alert} from 'react-native';
 import styles from './styles';
 
 import Loader from '../../components/Loader/Loader';
@@ -15,7 +15,16 @@ import HiddenIcon from '../../assets/HiddenIcon';
 
 import {COLORS} from '../../constants/styleConstans';
 
-const {logInRequest} = loginActions;
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import TouchID from 'react-native-touch-id';
+
+import {logOutActions} from '../../redux/actions/logOutActions';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const {logOutRequest, logOutSuccess} = logOutActions;
+
+const {logInRequest, logInSuccess} = loginActions;
 
 const LogIn = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -26,10 +35,27 @@ const LogIn = ({navigation}) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const {isLoading, error} = useSelector(state => state.auth);
 
-  const dispatch = useDispatch();
-
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+
+  const dispatch = useDispatch();
+
+  const {touchId, theme} = useSelector(state => state.settings);
+
+  const handleTouchID = () => {
+    TouchID.authenticate()
+      .then(() => {
+        AsyncStorage.getItem('user').then(user => {
+          if (user) {
+            const userData = JSON.parse(user);
+            dispatch(logInSuccess(userData));
+          }
+        });
+      })
+      .catch(() => {
+        Alert.alert('Error', 'Touch ID can`t recognize you');
+      });
+  };
 
   useEffect(() => {
     if (email.length > 0 && password.length > 0) {
@@ -39,11 +65,18 @@ const LogIn = ({navigation}) => {
     }
   }, [email, password]);
 
+  useEffect(() => {
+    const creds = auth().currentUser;
+    if (creds) {
+      AsyncStorage.setItem('user', JSON.stringify(creds));
+    }
+  }, []);
+
   return isLoading ? (
     <Loader />
   ) : (
-    <View style={styles.container}>
-      <Text>Login to App</Text>
+    <View style={[styles.container, styles.themed[theme]]}>
+      <Text style={styles.themed[theme]}>Login to App</Text>
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
@@ -52,7 +85,7 @@ const LogIn = ({navigation}) => {
           ref={emailRef}
           returnKeyType="next"
           onSubmitEditing={() => passwordRef.current.focus()}
-          style={styles.emailInput}
+          style={[styles.emailInput, styles.themed[theme]]}
         />
         <View style={styles.passwordContainer}>
           <TextInput
@@ -62,7 +95,7 @@ const LogIn = ({navigation}) => {
             onChangeText={setPassword}
             secureTextEntry={isPasswordSecure}
             returnKeyType="done"
-            style={styles.passwordInput}
+            style={[styles.passwordInput, styles.themed[theme]]}
           />
           <TouchableOpacity
             onPress={() => setIsPasswordSecure(!isPasswordSecure)}>
@@ -79,6 +112,23 @@ const LogIn = ({navigation}) => {
           style={[styles.button, styles.signUpButton]}
           onPress={() => navigation.navigate(PAGES.SIGN_UP)}>
           <Text style={styles.signUpButtonText}>Sign Up</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.button,
+            styles.logInButton,
+            !touchId && styles.disabled,
+          ]}
+          disabled={!touchId}
+          onPress={handleTouchID}>
+          <Text
+            style={[
+              styles.logInButtonText,
+              !touchId && styles.disabled,
+              styles.themed[theme],
+            ]}>
+            TouchID
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[

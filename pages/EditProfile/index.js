@@ -1,13 +1,12 @@
-import React, {useLayoutEffect, useState, useContext} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 import {View, TextInput, Text, TouchableOpacity} from 'react-native';
 import {useSelector} from 'react-redux';
 
-import ThemeContext from '../../Contexts/ThemeContext';
 import {COLORS} from '../../constants/styleConstans';
 import styles from './styles';
 
 const EditProfile = ({navigation}) => {
-  const {theme} = useContext(ThemeContext);
+  const {theme} = useSelector(state => state.settings);
 
   const userData = useSelector(state => state.auth.user);
 

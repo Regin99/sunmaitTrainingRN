@@ -1,12 +1,10 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
 
 import UploadPhoto from '../../components/UploadPhoto/UploadPhoto';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {logOutActions} from '../../redux/actions/logOutActions';
-
-import ThemeContext from '../../Contexts/ThemeContext';
 
 import PAGES from '../pages';
 
@@ -22,7 +20,8 @@ const {logOutRequest} = logOutActions;
 const Profile = ({navigation}) => {
   const dispatch = useDispatch();
   const {avatar, email} = useSelector(state => state.auth.user);
-  const {theme} = useContext(ThemeContext);
+  const {theme} = useSelector(state => state.settings);
+
   return (
     <View style={[styles.container, styles.containerThemed[theme]]}>
       <View style={styles.centeredContainer}>

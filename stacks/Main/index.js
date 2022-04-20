@@ -1,5 +1,6 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {useSelector} from 'react-redux';
 
 import TabsStack from '../Tabs';
 //pages
@@ -8,15 +9,12 @@ import Settings from '../../pages/Settings';
 
 import BackArrow from '../../components/BackArrow/BackArrow';
 import {COLORS} from '../../constants/styleConstans';
-
-import ThemeContext from '../../Contexts/ThemeContext';
-
 import styles from './styles';
 
 const Stack = createNativeStackNavigator();
 
 const Main = () => {
-  const {theme} = useContext(ThemeContext);
+  const {theme} = useSelector(state => state.settings);
 
   const screensOptions = ({navigation}) => ({
     headerStyle: styles.themedBG[theme],
@@ -26,6 +24,7 @@ const Main = () => {
       <BackArrow onPress={navigation.goBack} size={35} color={COLORS.blue} />
     ),
   });
+
   return (
     <Stack.Navigator>
       <Stack.Screen

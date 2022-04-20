@@ -1,4 +1,4 @@
-import {AUTH_ACTIONS_TYPES} from '../types';
+import {AUTH_ACTIONS_TYPES} from '../actionTypes';
 
 const initialState = {
   isLoading: false,
@@ -7,7 +7,14 @@ const initialState = {
   isSignUp: false,
 };
 
-const authReducer = (state = initialState, action) => {
+interface IAuthAction {
+  type: string;
+  payload: {
+    user: object;
+  };
+}
+
+const authReducer = (state = initialState, action: IAuthAction) => {
   switch (action.type) {
     case AUTH_ACTIONS_TYPES.LOGIN_REQUEST:
     case AUTH_ACTIONS_TYPES.SIGNUP_REQUEST:

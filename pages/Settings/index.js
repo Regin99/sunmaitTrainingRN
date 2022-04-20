@@ -1,15 +1,22 @@
-import React, {useContext} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, {useEffect} from 'react';
 import {View, Text, TouchableOpacity, Switch} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 
-import ThemeContext from '../../Contexts/ThemeContext';
+import setSettings from '../../redux/actions/settingsActions';
 import styles from './styles';
 
 const Settings = () => {
-  const {theme, setTheme} = useContext(ThemeContext);
+  const {theme, touchId, notifications} = useSelector(state => state.settings);
+  const dispatch = useDispatch();
 
-  const switchTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
+  const switchNotifications = () =>
+    dispatch(setSettings({notifications: !notifications}));
+
+  const switchDarkTheme = () =>
+    dispatch(setSettings({theme: theme === 'light' ? 'dark' : 'light'}));
+
+  const switchTouchId = () => dispatch(setSettings({touchId: !touchId}));
 
   return (
     <View style={[styles.container, styles.containerThemed[theme]]}>
@@ -19,19 +26,19 @@ const Settings = () => {
           <Text style={[styles.itemThemed[theme], styles.text]}>
             Allow Push Notifications
           </Text>
-          <Switch />
+          <Switch value={notifications} onValueChange={switchNotifications} />
         </View>
         <View style={styles.switch}>
           <Text style={[styles.itemThemed[theme], styles.text]}>
             Dark Theme
           </Text>
-          <Switch onValueChange={switchTheme} value={theme === 'dark'} />
+          <Switch onValueChange={switchDarkTheme} value={theme === 'dark'} />
         </View>
         <View style={styles.switch}>
           <Text style={[styles.itemThemed[theme], styles.text]}>
             Enable Face ID/Touch ID
           </Text>
-          <Switch />
+          <Switch value={touchId} onValueChange={switchTouchId} />
         </View>
       </View>
       <View style={[styles.itemThemed[theme], styles.itemContainer]}>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "100095711935",
+    "project_id": "sunmaitrn",
+    "storage_bucket": "sunmaitrn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100095711935:android:3996db37a840e1420c840a",
+        "android_client_info": {
+          "package_name": "com.sunmaitrn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "100095711935-kvlhi5oek6m9a7kolhfgoij3utdfljpt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnWfzzIJlRzVwipmg_d6OKYdPgDXj3OI4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "100095711935-kvlhi5oek6m9a7kolhfgoij3utdfljpt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

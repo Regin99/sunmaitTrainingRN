@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {COLORS, SIZES} from '../../constants/styleConstans';
 
 const styles = StyleSheet.create({
   container: {
@@ -6,18 +7,28 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  themed: {
+    light: {
+      backgroundColor: COLORS.white,
+      color: COLORS.black,
+    },
+    dark: {
+      backgroundColor: COLORS.lightBlack,
+      color: COLORS.white,
+    },
+  },
   inputContainer: {
     justifyContent: 'space-between',
     width: '80%',
-    marginBottom: 20,
+    marginBottom: SIZES.l,
   },
   emailInput: {
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-    padding: 10,
+    borderBottomColor: COLORS.lightGrey,
+    padding: SIZES.ms,
   },
   passwordInput: {
-    padding: 10,
+    padding: SIZES.ms,
     maxWidth: '80%',
   },
   passwordContainer: {
@@ -25,7 +36,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderBottomColor: COLORS.grey,
     maxWidth: '100%',
   },
   buttonContainer: {
@@ -34,26 +45,26 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   button: {
-    borderRadius: 10,
+    borderRadius: SIZES.ms,
   },
   signUpButton: {
-    backgroundColor: '#1C00FF',
-    padding: 10,
+    backgroundColor: COLORS.blue,
+    padding: SIZES.ms,
   },
   logInButton: {
     borderWidth: 1,
-    borderColor: '#1C00FF',
-    padding: 10,
+    borderColor: COLORS.blue,
+    padding: SIZES.ms,
   },
   signUpButtonText: {
-    color: '#f2f2f2',
+    color: COLORS.white,
   },
   logInButtonText: {
-    color: '#1C00FF',
+    color: COLORS.blue,
   },
   disabled: {
-    borderColor: '#ccc',
-    color: '#ccc',
+    borderColor: COLORS.grey,
+    color: COLORS.grey,
   },
 });
 export default styles;
