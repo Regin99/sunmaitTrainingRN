@@ -5,11 +5,9 @@ import auth from '@react-native-firebase/auth';
 
 const {logOutSuccess, logOutFailure} = logOutActions;
 
-const logOutUser = () => auth().signOut();
-
 function* logOutWorker() {
   try {
-    yield call(logOutUser);
+    yield call(() => auth().signOut());
     yield put(logOutSuccess());
   } catch (err) {
     if (err instanceof Error) {

@@ -1,4 +1,5 @@
 import {AUTH_ACTIONS_TYPES} from '../actionTypes';
+import {IUserData} from '../types';
 
 const initialState = {
   isLoading: false,
@@ -10,7 +11,7 @@ const initialState = {
 interface IAuthAction {
   type: string;
   payload: {
-    user: object;
+    user: IUserData;
   };
 }
 
