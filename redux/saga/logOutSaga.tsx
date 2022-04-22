@@ -1,17 +1,18 @@
-import {AUTH_ACTIONS_TYPES} from '../types';
+import {AUTH_ACTIONS_TYPES} from '../actionTypes';
 import {logOutActions} from '../actions/logOutActions';
 import {put, takeEvery, call} from 'redux-saga/effects';
+import auth from '@react-native-firebase/auth';
 
 const {logOutSuccess, logOutFailure} = logOutActions;
 
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-
-function* logOutWorker(action) {
+function* logOutWorker() {
   try {
-    yield call(delay, 1000);
+    yield call(() => auth().signOut());
     yield put(logOutSuccess());
   } catch (err) {
-    yield put(logOutFailure(err.message));
+    if (err instanceof Error) {
+      yield put(logOutFailure(err));
+    }
   }
 }
 

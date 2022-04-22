@@ -1,7 +1,6 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
-import ThemeContext from '../../Contexts/ThemeContext';
+import {useSelector} from 'react-redux';
 
 //pages
 import Home from '../../pages/Home';
@@ -15,7 +14,7 @@ import styles from './styles';
 const BottomTab = createBottomTabNavigator();
 
 const Tabs = () => {
-  const {theme} = useContext(ThemeContext);
+  const {theme} = useSelector(state => state.settings);
 
   const bottomStackOptions = ({route}) => ({
     tabBarIcon: ({focused}) => {

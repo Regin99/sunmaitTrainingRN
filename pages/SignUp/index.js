@@ -54,6 +54,8 @@ const SignUp = ({navigation}) => {
   const rePasswordRef = useRef(null);
 
   const dispatch = useDispatch();
+
+  const {theme} = useSelector(state => state.settings);
   const {error, isLoading} = useSelector(state => state.auth);
 
   const validate = (type, value) => {
@@ -159,15 +161,15 @@ const SignUp = ({navigation}) => {
   return isLoading ? (
     <Loader />
   ) : (
-    <SafeAreaView style={styles.safeAreaViewContainer}>
+    <SafeAreaView style={[styles.safeAreaViewContainer, styles.themed[theme]]}>
       <StatusBar barStyle={'light-content'} />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <View style={styles.container}>
+        <View style={[styles.container, styles.themed[theme]]}>
           <View style={styles.inputContainer}>
             <UploadPhoto avatar={avatar} setAvatar={setAvatar} />
             <Text>Upload a photo</Text>
             <TextInput
-              style={styles.input}
+              style={[styles.input, styles.themed[theme]]}
               value={email}
               ref={emailRef}
               keyboardType="email-address"

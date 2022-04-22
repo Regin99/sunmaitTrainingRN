@@ -1,16 +1,17 @@
-import {AUTH_ACTIONS_TYPES} from '../types';
+import {AUTH_ACTIONS_TYPES} from '../actionTypes';
+import {IError, IUserData} from '../types';
 
-const logInRequest = userData => ({
+const logInRequest = (userData: IUserData) => ({
   type: AUTH_ACTIONS_TYPES.LOGIN_REQUEST,
   payload: userData,
 });
 
-const logInSuccess = userData => ({
+const logInSuccess = (userData: IUserData) => ({
   type: AUTH_ACTIONS_TYPES.LOGIN_SUCCESS,
   payload: userData,
 });
 
-const logInFailure = error => ({
+const logInFailure = (error: IError) => ({
   type: AUTH_ACTIONS_TYPES.LOGIN_FAILURE,
   payload: error,
 });

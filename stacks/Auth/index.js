@@ -1,5 +1,6 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {useSelector} from 'react-redux';
 
 //pages
 import LogIn from '../../pages/LogIn';
@@ -15,12 +16,16 @@ import styles from './styles';
 const Stack = createNativeStackNavigator();
 
 const Auth = () => {
+  const {theme} = useSelector(state => state.settings);
+
   const signUpOptions = ({navigation}) => ({
     title: 'Sign Up',
     headerLeft: () => (
       <BackArrow onPress={navigation.goBack} size={35} color={COLORS.blue} />
     ),
-    headerTitleStyle: styles.headerTitle,
+    headerStyle: styles.themed[theme],
+    headerTitleStyle: [styles.headerTitle, styles.themed[theme]],
+    headerTitleAlign: 'center',
   });
 
   return (
