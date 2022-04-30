@@ -1,6 +1,5 @@
-import React, {useState, useRef, useEffect, useLayoutEffect} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {TextInput, TouchableOpacity, Text, View, Alert} from 'react-native';
-import styles from './styles';
 
 import Loader from '../../components/Loader/Loader';
 import ModalError from '../../components/ModalError/ModalError';
@@ -9,20 +8,17 @@ import {useDispatch} from 'react-redux';
 import {loginActions} from '../../redux/actions/logInActions';
 import {useSelector} from 'react-redux';
 
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import TouchID from 'react-native-touch-id';
+
 import PAGES from '../pages';
 
 import HiddenIcon from '../../assets/HiddenIcon';
 
 import {COLORS} from '../../constants/styleConstans';
 
-import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
-import TouchID from 'react-native-touch-id';
-
-import {logOutActions} from '../../redux/actions/logOutActions';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const {logOutRequest, logOutSuccess} = logOutActions;
+import styles from './styles';
 
 const {logInRequest, logInSuccess} = loginActions;
 
@@ -43,17 +39,21 @@ const LogIn = ({navigation}) => {
   const {touchId, theme} = useSelector(state => state.settings);
 
   const handleTouchID = () => {
+    const creds = auth().currentUser;
     TouchID.authenticate()
       .then(() => {
-        AsyncStorage.getItem('user').then(user => {
-          if (user) {
-            const userData = JSON.parse(user);
-            dispatch(logInSuccess(userData));
-          }
-        });
+        const userId = creds.uid;
+        firestore()
+          .collection('users')
+          .doc(userId)
+          .get()
+          .then(doc => {
+            const user = doc.data();
+            dispatch(logInSuccess(user));
+          });
       })
       .catch(() => {
-        Alert.alert('Error', 'Touch ID can`t recognize you');
+        Alert.alert('Error', 'You are not logged');
       });
   };
 
@@ -64,13 +64,6 @@ const LogIn = ({navigation}) => {
       setIsDisabled(true);
     }
   }, [email, password]);
-
-  useEffect(() => {
-    const creds = auth().currentUser;
-    if (creds) {
-      AsyncStorage.setItem('user', JSON.stringify(creds));
-    }
-  }, []);
 
   return isLoading ? (
     <Loader />

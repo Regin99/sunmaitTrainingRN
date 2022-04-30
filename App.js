@@ -22,7 +22,6 @@ import Loader from './components/Loader/Loader';
 
 const App = () => {
   const isLoggedIn = useSelector(state => state.auth.isLoggIn);
-
   return (
     <NavigationContainer initialRouteName="LogIn">
       {isLoggedIn ? <Main /> : <Auth />}

@@ -4,7 +4,7 @@ import {persistReducer, persistStore} from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import rootWatcher from './saga/rootWatcher';
-import rootReducer from './reducers/rootReducer';
+import rootReducer from './reducers/root';
 import {composeWithDevTools} from '@redux-devtools/extension';
 const sagaMiddleware = createSagaMiddleware();
 

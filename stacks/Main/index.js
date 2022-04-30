@@ -36,10 +36,10 @@ const Main = () => {
     messaging()
       .getInitialNotification()
       .then(remoteMessage => remoteMessage && navigateToSearch());
-  }, [navigation]);
+  }, []);
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="Tabs">
       <Stack.Screen
         name="Tabs"
         options={{
