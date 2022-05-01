@@ -1,9 +1,11 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, {useEffect} from 'react';
-import {View, Text, TouchableOpacity, Switch} from 'react-native';
+import React from 'react';
+import {View, Text, TouchableOpacity} from 'react-native';
+import Switcher from '../../components/Switcher/Switcher';
+
 import {useDispatch, useSelector} from 'react-redux';
 
 import setSettings from '../../redux/actions/settingsActions';
+
 import styles from './styles';
 
 const Settings = () => {
@@ -26,19 +28,19 @@ const Settings = () => {
           <Text style={[styles.itemThemed[theme], styles.text]}>
             Allow Push Notifications
           </Text>
-          <Switch value={notifications} onValueChange={switchNotifications} />
+          <Switcher value={notifications} onValueChange={switchNotifications} />
         </View>
         <View style={styles.switch}>
           <Text style={[styles.itemThemed[theme], styles.text]}>
             Dark Theme
           </Text>
-          <Switch onValueChange={switchDarkTheme} value={theme === 'dark'} />
+          <Switcher onValueChange={switchDarkTheme} value={theme === 'dark'} />
         </View>
         <View style={styles.switch}>
           <Text style={[styles.itemThemed[theme], styles.text]}>
             Enable Face ID/Touch ID
           </Text>
-          <Switch value={touchId} onValueChange={switchTouchId} />
+          <Switcher value={touchId} onValueChange={switchTouchId} />
         </View>
       </View>
       <View style={[styles.itemThemed[theme], styles.itemContainer]}>

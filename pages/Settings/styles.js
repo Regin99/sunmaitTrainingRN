@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     padding: SIZES.s,
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginHorizontal: SIZES.s,
   },
   label: {
     fontFamily: FONTS.Raleway,

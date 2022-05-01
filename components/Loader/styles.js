@@ -18,5 +18,13 @@ const styles = StyleSheet.create({
     borderBottomColor: COLORS.blue,
     borderLeftColor: COLORS.transperent,
   },
+  themed: {
+    light: {
+      backgroundColor: COLORS.white,
+    },
+    dark: {
+      backgroundColor: COLORS.lightBlack,
+    },
+  },
 });
 export default styles;

@@ -1,6 +1,6 @@
-import logInWatcher from './logInSaga';
-import signUpWatcher from './signUpSaga';
-import logOutWatcher from './logOutSaga';
+import logInWatcher from './logIn';
+import signUpWatcher from './signUp';
+import logOutWatcher from './logOut';
 import {all} from 'redux-saga/effects';
 
 function* rootWatcher() {

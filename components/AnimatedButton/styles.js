@@ -3,19 +3,21 @@ import {COLORS} from '../../constants/styleConstans';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: 200,
+    height: 40,
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: 100,
+    backgroundColor: COLORS.darkRed,
   },
-  themed: {
-    light: {
-      backgroundColor: COLORS.white,
-      color: COLORS.black,
-    },
-    dark: {
-      backgroundColor: COLORS.lightBlack,
-      color: COLORS.white,
-    },
+  text: {
+    color: COLORS.white,
+    fontWeight: 'bold',
+  },
+  circle: {
+    width: 30,
+    height: 30,
   },
 });
+
 export default styles;

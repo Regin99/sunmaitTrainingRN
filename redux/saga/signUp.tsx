@@ -18,7 +18,6 @@ const signUpUser = (userData: IUserData) => {
         number,
         avatar,
       });
-      return userId;
     })
     .catch(error => {
       throw new Error(error.message);

@@ -13,29 +13,41 @@ import styles from './styles';
 
 const BottomTab = createBottomTabNavigator();
 
+//when u say to make this with switch, u mean that solution, or i need to restruct the BottomIcon component to get rid of ternary operators in cases
+const BottomIcons = (name, focused) => {
+  let iconName;
+  switch (name) {
+    case 'Home':
+      iconName = focused ? 'home-outline' : 'home';
+      break;
+    case 'Search':
+      iconName = focused ? 'search-outline' : 'search';
+      break;
+    case 'Profile':
+      iconName = focused ? 'person-outline' : 'person';
+      break;
+    default:
+      iconName = 'home';
+  }
+  return <BottomIcon name={iconName} />;
+};
+
 const Tabs = () => {
   const {theme} = useSelector(state => state.settings);
 
   const bottomStackOptions = ({route}) => ({
-    tabBarIcon: ({focused}) => {
-      let iconName;
-      if (route.name === 'Home') {
-        iconName = focused ? 'home-outline' : 'home';
-      } else if (route.name === 'Search') {
-        iconName = focused ? 'search-outline' : 'search';
-      } else if (route.name === 'Profile') {
-        iconName = focused ? 'person-outline' : 'person';
-      }
-      return <BottomIcon name={iconName} />;
-    },
+    tabBarIcon: ({focused}) => BottomIcons(route.name, focused),
     headerStyle: styles.themedBG[theme],
     headerTitleStyle: styles.headerTitle[theme],
     headerTitleAlign: 'center',
     tabBarStyle: [styles.themedBG[theme], styles.tabBar],
     tabBarLabelStyle: styles.tabBarLabel,
   });
+
   return (
-    <BottomTab.Navigator screenOptions={bottomStackOptions}>
+    <BottomTab.Navigator
+      screenOptions={bottomStackOptions}
+      initialRouteName={'Home'}>
       <BottomTab.Screen name="Home" component={Home} />
       <BottomTab.Screen name="Search" component={Search} />
       <BottomTab.Screen
