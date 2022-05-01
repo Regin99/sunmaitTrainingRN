@@ -26,26 +26,24 @@ const Switcher = ({value, onValueChange}) => {
     },
   });
 
-  const switchOn = () => {
-    Animated.timing(switchAnimation, {
-      toValue: 1,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const switchOff = () => {
-    Animated.timing(switchAnimation, {
-      toValue: 0,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
+  const animateSwitch = () => {
+    value
+      ? Animated.timing(switchAnimation, {
+          toValue: 0,
+          duration: 300,
+          useNativeDriver: true,
+        }).start()
+      : Animated.timing(switchAnimation, {
+          toValue: 1,
+          duration: 300,
+          useNativeDriver: true,
+        }).start();
   };
 
   const handlePress = () => {
     //idk how to test vibration on emulator, but on pet-expo project, it works
     Vibration.vibrate(50);
-    value ? switchOff() : switchOn();
+    animateSwitch();
     onValueChange(!value);
   };
 

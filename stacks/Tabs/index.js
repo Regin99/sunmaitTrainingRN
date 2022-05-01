@@ -36,9 +36,7 @@ const Tabs = () => {
   const {theme} = useSelector(state => state.settings);
 
   const bottomStackOptions = ({route}) => ({
-    tabBarIcon: ({focused}) => {
-      return BottomIcons(route.name, focused);
-    },
+    tabBarIcon: ({focused}) => BottomIcons(route.name, focused),
     headerStyle: styles.themedBG[theme],
     headerTitleStyle: styles.headerTitle[theme],
     headerTitleAlign: 'center',
