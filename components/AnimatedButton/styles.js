@@ -15,20 +15,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   circle: {
-    width: 35,
-    height: 35,
-    borderColor: COLORS.semiTransperentWhite,
-    borderWidth: 10,
-    borderRadius: 100,
-  },
-  circleInner: {
-    position: 'absolute',
-    top: -10,
-    left: 3,
-    width: 10,
-    height: 10,
-    borderRadius: 100,
-    backgroundColor: COLORS.white,
+    width: 30,
+    height: 30,
   },
 });
 

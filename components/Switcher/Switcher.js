@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {
   Animated,
   View,
@@ -10,8 +10,8 @@ import {
 import styles from './styles';
 
 const Switcher = ({value, onValueChange}) => {
-  //is Number(value) normal practice?
   const switchAnimation = useRef(new Animated.Value(Number(value))).current;
+  const [disabled, setDisabled] = useState(false);
 
   const animationStyles = StyleSheet.create({
     switch: {
@@ -27,21 +27,16 @@ const Switcher = ({value, onValueChange}) => {
   });
 
   const animateSwitch = () => {
-    value
-      ? Animated.timing(switchAnimation, {
-          toValue: 0,
-          duration: 300,
-          useNativeDriver: true,
-        }).start()
-      : Animated.timing(switchAnimation, {
-          toValue: 1,
-          duration: 300,
-          useNativeDriver: true,
-        }).start();
+    setDisabled(true);
+    const newValue = Number(!value);
+    Animated.timing(switchAnimation, {
+      toValue: newValue,
+      duration: 300,
+      useNativeDriver: true,
+    }).start(() => setDisabled(false));
   };
 
   const handlePress = () => {
-    //idk how to test vibration on emulator, but on pet-expo project, it works
     Vibration.vibrate(50);
     animateSwitch();
     onValueChange(!value);
@@ -50,6 +45,7 @@ const Switcher = ({value, onValueChange}) => {
   return (
     <TouchableOpacity
       onPress={handlePress}
+      disabled={disabled}
       style={[
         styles.switchContainer,
         value ? styles.switchContainerOn : styles.switchContainerOff,
